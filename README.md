@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  [![author: Farhan Dhrubo](https://img.shields.io/badge/author-Farhan%20Dhrubo-f97316)](https://github.com/farhanic017)
+  <a href="[author: Farhan Dhrubo](https://img.shields.io/badge/author-Farhan%20Dhrubo-f97316)](https://github.com/farhanic017)" /></a>
   <img src="https://img.shields.io/github/v/release/farhanic017/map-to-glb?style=flat-square&color=blue" alt="Version" />
   <img src="https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square" alt="License" />
   <img src="https://img.shields.io/github/downloads/farhanic017/map-to-glb/total?style=flat-square&color=green" alt="Downloads" />
