@@ -75,6 +75,14 @@ fn export_glb(path: String) -> Result<String, String> {
 
 fn main() {
     tauri::Builder::default()
+        .setup(|app| {
+            #[cfg(debug_assertions)]
+            {
+                let window = app.get_window("main").unwrap();
+                window.set_title("Map to GLB - 3D Building Mapping").ok();
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             greet,
             get_app_version,

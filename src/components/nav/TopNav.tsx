@@ -1,4 +1,3 @@
-import { useCarStore } from "@/state/carStore";
 import { css } from "@emotion/react";
 import { DetailedHTMLProps, ButtonHTMLAttributes, useEffect, useState } from "react";
 
@@ -102,8 +101,6 @@ interface ButtonProps
 }
 
 export function TopNav({ step }: { step: number }) {
-  const setThirdMode = useCarStore((state) => state.setThirdMode);
-  const thirdMode = useCarStore((state) => state.thirdMode);
   const materialPreset = useSceneStore((state) => state.materialPreset);
   const textureEnabled = useSceneStore((state) => state.textureEnabled);
   const heightScale = useSceneStore((state) => state.heightScale);
@@ -132,7 +129,6 @@ export function TopNav({ step }: { step: number }) {
   );
   const setRemoteApiKey = useRuntimeStore((state) => state.setRemoteApiKey);
   const setAgentMode = useRuntimeStore((state) => state.setAgentMode);
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const [selectedProviderId, setSelectedProviderId] = useState<string | null>(
     useRuntimeStore.getState().selectedProvider || null
   );
@@ -251,26 +247,6 @@ export function TopNav({ step }: { step: number }) {
           <NavButton isShow={step >= 1} onClick={() => setOpenModal(true)}>
             Options
           </NavButton>
-
-          {!isMobile && (
-            <>
-              {thirdMode ? (
-                <NavButton
-                  isShow={step == 2}
-                  onClick={() => setThirdMode(false)}
-                >
-                  Disable Car
-                </NavButton>
-              ) : (
-                <NavButton
-                  isShow={step == 2}
-                  onClick={() => setThirdMode(true)}
-                >
-                  Car Mode
-                </NavButton>
-              )}
-            </>
-          )}
         </div>
       </div>
 

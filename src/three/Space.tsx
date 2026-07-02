@@ -11,7 +11,6 @@ import { Html, Sky, Environment, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { useActionStore } from "@/state/exportStore";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
-import Car from "./Car";
 import instanceFleet from "@/api/axios";
 import {
   BuildingMaterialPreset,
@@ -2787,7 +2786,6 @@ export function Space() {
         />
       ))}
 
-      <Car />
       <Export />
       <Sky
         distance={450000}
