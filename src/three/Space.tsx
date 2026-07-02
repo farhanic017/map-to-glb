@@ -7,7 +7,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { useAreaStore } from "@/state/areaStore";
-import { Html, Sky, Environment, Line } from "@react-three/drei";
+import { Html, Sky, Environment, Line, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useActionStore } from "@/state/exportStore";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
@@ -2787,6 +2787,13 @@ export function Space() {
       ))}
 
       <Export />
+      <OrbitControls
+        enableDamping
+        dampingFactor={0.1}
+        minDistance={5}
+        maxDistance={500}
+        maxPolarAngle={Math.PI / 2.1}
+      />
       <Sky
         distance={450000}
         sunPosition={[80, 40, 80]}
