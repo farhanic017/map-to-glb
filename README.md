@@ -28,7 +28,8 @@
 
 ## Demo
 
-https://github.com/farhanic017/map-to-glb/releases/download/v3.4.0/demo-video.mp4
+![Map to GLB live demo](./.github/demo-video.mp4)
+
 
 ## About
 
