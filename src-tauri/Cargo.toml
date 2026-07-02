@@ -1,6 +1,6 @@
 [package]
 name = "map-to-glb"
-version = "2.7.0"
+version = "2.8.0"
 description = "Map to GLB - Generate real-world 3D maps as GLB files using OpenStreetMap data"
 authors = ["Farhan Dhrubo <https://github.com/farhanic017>"]
 license = "GPL-3.0"
