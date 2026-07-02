@@ -520,14 +520,13 @@ export function TopNav({ step }: { step: number }) {
 }
 
 export function NavButton(props: ButtonProps) {
-  const isDark = useDarkMode();
   return (
     <button
       css={css({
-        color: isDark ? "#25272c" : "#ffffff",
-        backgroundColor: isDark ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.15)",
+        color: "#25272c",
+        backgroundColor: "rgba(0, 0, 0, 0.06)",
         backdropFilter: "blur(8px)",
-        border: isDark ? "1px solid #000000" : "1px solid rgba(255, 255, 255, 0.25)",
+        border: "1px solid #000000",
         padding: "0.5rem 1rem",
         borderRadius: "8px",
         fontWeight: "500",
@@ -536,7 +535,7 @@ export function NavButton(props: ButtonProps) {
         cursor: "pointer",
         transition: "all 0.2s ease",
         ":hover": {
-          backgroundColor: isDark ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.25)",
+          backgroundColor: "rgba(0, 0, 0, 0.12)",
         },
       })}
       {...props}
