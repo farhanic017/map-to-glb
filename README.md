@@ -20,6 +20,7 @@
   <img src="https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square" alt="License" />
   <img src="https://img.shields.io/github/downloads/farhanic017/map-to-glb/total?style=flat-square&color=green" alt="Downloads" />
   <img src="https://img.shields.io/github/stars/farhanic017/map-to-glb?style=flat-square&color=yellow" alt="Stars" />
+<a href="https://www.patreon.com/farhanic0"><img alt="Sponsor" src="https://img.shields.io/badge/sponsor-%E2%9D%A4-pink?style=flat-square" /></a>
 </p>
 
 ---
