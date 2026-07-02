@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Map to GLB",
-    "version": "2.0.0"
+    "version": "2.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -52,7 +52,7 @@
       }
     },
     "security": {
-      "csp": "default-src 'self'; connect-src 'self' https://* http://*; img-src 'self' https://* http://* data:; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https://*; script-src 'self' 'unsafe-inline'"
+      "csp": "default-src 'self'; connect-src 'self' https://* http://*; img-src 'self' https://* http://* data:; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https://*; script-src 'self' 'unsafe-inline'; frame-src 'none'"
     },
     "updater": {
       "active": false

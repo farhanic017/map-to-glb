@@ -33,6 +33,20 @@ import { requestRemoteBuildings } from "@/utils/remoteCompute";
 import { AppOnlyGate } from "@/components/AppOnlyGate";
 import { shouldBlockPublicWebsite } from "@/utils/appDistribution";
 
+function WebAds() {
+  if (window.__TAURI__) return null;
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7048690805050147";
+    script.crossOrigin = "anonymous";
+    document.head.appendChild(script);
+  }, []);
+
+  return null;
+}
+
 const IconSize = css({
   width: "14px",
   height: "14px",
@@ -656,6 +670,7 @@ out body geom;`;
 
   return (
     <div css={css({ height: "100%", width: "100%", backgroundColor: "#ffffff" })}>
+      <WebAds />
       <TopNav step={step} />
 
       <FullscreenModal isOpen={steps[step] == "front"} fullScreen>
