@@ -1,7 +1,7 @@
 {
   "name": "map-to-glb",
   "private": true,
-  "version": "3.2.0",
+  "version": "3.3.0",
   "type": "module",
   "license": "GPL-3.0-only",
   "author": "Farhan Dhrubo <https://github.com/farhanic017>",
@@ -21,7 +21,7 @@
     "@emotion/react": "^11.14.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
-    "@tauri-apps/api": "^1.6.0",
+    "@tauri-apps/api": "^2.0.0",
     "@types/three": "0.173.0",
     "axios": "^1.7.9",
     "deventds2": "^0.1.10",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@tauri-apps/cli": "^1.6.3",
+    "@tauri-apps/cli": "^2.0.0",
     "@types/leaflet": "^1.9.16",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",

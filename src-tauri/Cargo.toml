@@ -1,6 +1,6 @@
 [package]
 name = "map-to-glb"
-version = "3.2.0"
+version = "3.3.0"
 description = "Map to GLB - Generate real-world 3D maps as GLB files using OpenStreetMap data"
 authors = ["Farhan Dhrubo <https://github.com/farhanic017>"]
 license = "GPL-3.0"
@@ -10,12 +10,15 @@ edition = "2021"
 rust-version = "1.60"
 
 [build-dependencies]
-tauri-build = { version = "1.5", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.6", features = ["shell-open", "dialog-all", "fs-read-file", "fs-write-file", "path-all"] }
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
 
 [features]
 default = ["custom-protocol"]

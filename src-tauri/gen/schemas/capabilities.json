@@ -1,0 +1,1 @@
+{"default":{"identifier":"default","description":"Default capabilities for Map to GLB","local":true,"windows":["main"],"permissions":["core:default","shell:allow-open","dialog:default","fs:default","fs:allow-read-file","fs:allow-write-file"]}}
