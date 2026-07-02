@@ -1,6 +1,23 @@
 import { useCarStore } from "@/state/carStore";
 import { css } from "@emotion/react";
-import { DetailedHTMLProps, ButtonHTMLAttributes, useState } from "react";
+import { DetailedHTMLProps, ButtonHTMLAttributes, useEffect, useState } from "react";
+
+function useDarkMode() {
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
+
+  useEffect(() => {
+    const el = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setIsDark(el.classList.contains("dark"));
+    });
+    observer.observe(el, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+}
 import { Modal } from "../modal/Modal";
 import { Column } from "../flex/Column";
 import { Title } from "../text/Title";
@@ -494,7 +511,7 @@ export function TopNav({ step }: { step: number }) {
 }
 
 export function NavButton(props: ButtonProps) {
-  const isDark = document.documentElement.classList.contains("dark");
+  const isDark = useDarkMode();
   return (
     <button
       css={css({
