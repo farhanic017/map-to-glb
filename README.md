@@ -28,7 +28,7 @@
 
 ## Demo
 
-https://github.com/user-attachments/assets/live-demo.mp4
+https://github.com/farhanic017/map-to-glb/releases/download/v3.4.0/demo-video.mp4
 
 ## About
 
