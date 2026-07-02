@@ -28,7 +28,7 @@
 
 ## Demo
 
-<video src="https://github.com/farhanic017/map-to-glb/raw/main/.github/live%20demo.mp4" controls width="100%"></video>
+https://github.com/user-attachments/assets/live-demo.mp4
 
 ## About
 
