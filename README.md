@@ -28,7 +28,7 @@
 
 ## Demo
 
-![Map to GLB live demo](./.github/demo-video.mp4)
+![Map to GLB live demo](./.github/demo-video.gif)
 
 
 ## About
