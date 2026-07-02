@@ -17,6 +17,9 @@ import {
 import L, { LatLng, LatLngBounds } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { css } from "@emotion/react";
+
+const mobileMq = "@media (max-width: 768px)";
+
 import {
   ChevronDown,
   Circle,
@@ -269,11 +272,16 @@ const controlPanelStyle = css({
   position: "absolute",
   zIndex: 9999,
   right: "1rem",
-  top: "1rem",
+  top: "0.5rem",
   display: "flex",
   justifyContent: "flex-end",
   flexWrap: "wrap",
-  gap: "0.5rem",
+  gap: "0.4rem",
+  [mobileMq]: {
+    right: "0.5rem",
+    top: "0.3rem",
+    gap: "0.3rem",
+  },
 });
 
 const buttonBaseStyle = {
@@ -500,6 +508,13 @@ const mapToolsStyle = css({
   border: "1px solid rgba(0, 0, 0, 0.1)",
   boxShadow: "0 4px 24px rgba(0, 0, 0, 0.15)",
   transition: "background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
+  [mobileMq]: {
+    left: "0.5rem",
+    top: "0.5rem",
+    width: "min(22rem, calc(100% - 1rem))",
+    padding: "0.5rem",
+    gap: "0.35rem",
+  },
 });
 
 const apiKeyPanelStyle = css({

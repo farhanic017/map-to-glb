@@ -176,7 +176,8 @@ export function TopNav({ step }: { step: number }) {
       >
         <div
           css={css({
-            paddingLeft: "2rem",
+            paddingLeft: "1rem",
+            [mq[0]]: { paddingLeft: "0.75rem" },
             alignItems: "center",
             flexDirection: "row",
             display: "flex",
@@ -234,7 +235,8 @@ export function TopNav({ step }: { step: number }) {
 
         <div
           css={css({
-            paddingRight: "2rem",
+            paddingRight: "1rem",
+            [mq[0]]: { paddingRight: "0.5rem", gap: "0.3rem" },
             display: "flex",
             flexDirection: "row",
             gap: "0.5rem",
@@ -531,9 +533,11 @@ export function NavButton(props: ButtonProps) {
         borderRadius: "8px",
         fontWeight: "500",
         fontSize: "12px",
+        [mq[0]]: { padding: "0.4rem 0.6rem", fontSize: "11px" },
         display: props.isShow ? "" : "none",
         cursor: "pointer",
         transition: "all 0.2s ease",
+        whiteSpace: "nowrap",
         ":hover": {
           backgroundColor: "rgba(0, 0, 0, 0.12)",
         },
