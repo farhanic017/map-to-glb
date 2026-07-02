@@ -34,7 +34,7 @@ import { AppOnlyGate } from "@/components/AppOnlyGate";
 import { shouldBlockPublicWebsite } from "@/utils/appDistribution";
 
 function WebAds() {
-  if (window.__TAURI__) return null;
+  if (window.__TAURI__ || window.__TAURI_INTERNALS__) return null;
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -755,7 +755,7 @@ out body geom;`;
       </NextButton>
 
       {/* Bottom Banner - Only in web browser, completely removed from desktop */}
-      {step === 0 && !window.__TAURI__ && (
+      {step === 0 && !window.__TAURI__ && !window.__TAURI_INTERNALS__ && (
         <div
           css={css({
             position: "fixed",

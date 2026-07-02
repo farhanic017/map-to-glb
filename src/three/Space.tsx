@@ -1484,6 +1484,7 @@ function RoadSurface({
         geometry={borderGeometry}
         position={[0, 0.15, 0]}
         receiveShadow
+        renderOrder={1}
         userData={{ exportToGLB: true, featureType: "curb" }}
       >
         <meshStandardMaterial
@@ -1493,7 +1494,7 @@ function RoadSurface({
           bumpScale={0.05}
         />
       </mesh>
-      <mesh geometry={geometry} position={[0, 0.16, 0]} receiveShadow userData={{ exportToGLB: true, featureType: "road" }}>
+      <mesh geometry={geometry} position={[0, 0.16, 0]} receiveShadow renderOrder={2} userData={{ exportToGLB: true, featureType: "road" }}>
         <meshStandardMaterial
           color={roadStyle.fallback}
           roughness={roadStyle.roughness}
@@ -1506,7 +1507,7 @@ function RoadSurface({
         />
       </mesh>
       <Line
-        points={points.map((point) => point.clone().setY(0.17))}
+        points={points.map((point) => point.clone().setY(0.22))}
         color={getRoadLineColor(tags)}
         lineWidth={isPavementRoad(tags) ? 0.8 : 2.5}
         dashed={String(tags.highway || "").includes("service") || isPavementRoad(tags)}
@@ -1554,6 +1555,7 @@ function LinearMapFeature({
         geometry={borderGeometry}
         position={[0, 0.15, 0]}
         receiveShadow
+        renderOrder={1}
         userData={{ exportToGLB: true, featureType: "curb" }}
       >
         <meshStandardMaterial
@@ -1562,7 +1564,7 @@ function LinearMapFeature({
           metalness={0.0}
         />
       </mesh>
-      <mesh geometry={geometry} position={[0, 0.16, 0]} receiveShadow userData={{ exportToGLB: true, featureType: "road" }}>
+      <mesh geometry={geometry} position={[0, 0.16, 0]} receiveShadow renderOrder={2} userData={{ exportToGLB: true, featureType: "road" }}>
         <meshStandardMaterial
           color={kind === "waterway" ? "#4488aa" : "#888888"}
           roughness={kind === "waterway" ? 0.3 : 0.85}
@@ -1572,7 +1574,7 @@ function LinearMapFeature({
         />
       </mesh>
       <Line
-        points={points.map((point) => point.clone().setY(0.1))}
+        points={points.map((point) => point.clone().setY(0.20))}
         color={lineColor}
         lineWidth={kind === "waterway" ? 2 : 1.5}
         userData={{ exportToGLB: true, featureType: "centerline" }}
@@ -1772,6 +1774,7 @@ function MapSurfaceFeature({
         rotation={[-Math.PI / 2, 0, 0]}
         position={[0, kind === "water" ? 0.12 : 0.15, 0]}
         receiveShadow
+        renderOrder={0}
         userData={{ exportToGLB: true, featureType: "surface" }}
       >
         <shapeGeometry args={[shape]} />
@@ -2138,7 +2141,8 @@ function Building({
           emissiveIntensity={material.emissiveIntensity || 0}
           emissiveMap={facadeTextures?.emissiveMap}
         />
-        {(hovered || clicked) && hoverPos && (
+      </mesh>
+      {(hovered || clicked) && hoverPos && (
           <Html position={[hoverPos.x, hoverPos.y + extrudeSettings.depth + 0.5, hoverPos.z]} center>
           <div
             role="dialog"
@@ -2297,7 +2301,6 @@ function Building({
           </div>
         </Html>
         )}
-      </mesh>
       <lineSegments
         geometry={edgeGeometry}
         rotation={[-Math.PI / 2, 0, 0]}

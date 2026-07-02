@@ -5,6 +5,7 @@ declare global {
   interface Window {
     google?: any;
     __TAURI__?: any;
+    __TAURI_INTERNALS__?: any;
   }
 
   namespace JSX {
