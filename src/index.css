@@ -61,3 +61,20 @@ html.dark .maplibregl-map,
 html.dark .leaflet-container {
   filter: brightness(0.8) contrast(1.1);
 }
+
+/* Prevent text selection on map during lasso drawing */
+.leaflet-container,
+.leaflet-container * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection in inputs and buttons */
+input, textarea, button, [contenteditable] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

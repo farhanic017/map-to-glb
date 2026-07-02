@@ -9,6 +9,10 @@
 
 ![Map to GLB Screenshot](./.github/screenshot.png)
 
+## Live Demo
+
+https://github.com/user-attachments/assets/live-demo.mp4
+
 ## About The Project
 
 Map to GLB is a 3D building mapping service implemented with [React-Three-Fiber](https://github.com/pmndrs/react-three-fiber). It allows exporting as a GLB file, and all features are free to use. Based on this project, various functionalities such as **digital twin**, **drone surveying**, and **GPS markers** can be implemented.
