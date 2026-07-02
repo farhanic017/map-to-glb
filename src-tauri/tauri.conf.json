@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Map to GLB",
-    "version": "3.0.0"
+    "version": "3.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -21,7 +21,7 @@
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "MIT License",
+      "copyright": "GPL 3.0 License",
       "deb": {
         "depends": []
       },
