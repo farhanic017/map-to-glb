@@ -17,7 +17,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/v/release/farhanic017/map-to-glb?style=flat-square&color=blue" alt="Version" />
-  <img src="https://img.shields.io/github/license/farhanic017/map-to-glb?style=flat-square" alt="License" />
+  <img src="https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square" alt="License" />
   <img src="https://img.shields.io/github/downloads/farhanic017/map-to-glb/total?style=flat-square&color=green" alt="Downloads" />
   <img src="https://img.shields.io/github/stars/farhanic017/map-to-glb?style=flat-square&color=yellow" alt="Stars" />
 </p>
@@ -28,7 +28,7 @@
 
 ## Demo
 
-https://github.com/user-attachments/assets/live%20demo.mp4
+https://github.com/user-attachments/assets/demo.mp4
 
 ## About
 
