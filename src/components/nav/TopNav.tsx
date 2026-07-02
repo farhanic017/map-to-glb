@@ -183,6 +183,15 @@ export function TopNav({ step }: { step: number }) {
             gap: "0.75rem",
           })}
         >
+          <img
+            src="/favicon.png"
+            alt="Map to GLB"
+            css={css({
+              width: "20px",
+              height: "20px",
+              borderRadius: "4px",
+            })}
+          />
           <span
             css={css({
               fontSize: "14px",
@@ -190,7 +199,7 @@ export function TopNav({ step }: { step: number }) {
               color: "#25272c",
             })}
           >
-            🗺️ Map to GLB
+            Map to GLB
           </span>
           <a
             href="https://www.patreon.com/cw/Farhanic"
