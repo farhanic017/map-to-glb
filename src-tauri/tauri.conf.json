@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Map to GLB",
-    "version": "2.8.0"
+    "version": "2.9.0"
   },
   "tauri": {
     "allowlist": {
@@ -51,8 +51,8 @@
         "timestampUrl": "",
         "nsis": {
           "installerIcon": "icons/icon.ico",
-          "sidebarImage": "icons/sidebar.png",
-          "headerImage": "icons/header.png"
+          "sidebarImage": "icons/sidebar.bmp",
+          "headerImage": "icons/header.bmp"
         }
       }
     },

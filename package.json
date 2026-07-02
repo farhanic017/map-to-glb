@@ -1,7 +1,7 @@
 {
   "name": "map-to-glb",
   "private": true,
-  "version": "2.8.0",
+  "version": "2.9.0",
   "type": "module",
   "license": "GPL-3.0-only",
   "author": "Farhan Dhrubo <https://github.com/farhanic017>",

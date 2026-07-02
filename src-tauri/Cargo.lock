@@ -1610,7 +1610,7 @@ dependencies = [
 
 [[package]]
 name = "map-to-glb"
-version = "2.8.0"
+version = "2.9.0"
 dependencies = [
  "serde",
  "serde_json",
