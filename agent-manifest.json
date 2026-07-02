@@ -1,0 +1,50 @@
+{
+  "name": "mapglb",
+  "version": "2.0.0",
+  "author": "Farhan Dhrubo <https://github.com/farhanic017>",
+  "license": "GPL-3.0",
+  "repository": "https://github.com/farhanic017/map-to-glb",
+  "distribution": "app-first",
+  "description": "Map to GLB - Generate real-world 3D maps as GLB files with OctoCode integration",
+  "commands": {
+    "devApp": "npm run dev",
+    "mcpServer": "npm run mapglb:mcp",
+    "cliSchema": "npm run mapglb:cli -- schema",
+    "remoteProcess": "npm run mapglb:cli -- process --bounds south,west,north,east --remote https://server"
+  },
+  "remoteGpu": {
+    "endpoint": "http://127.0.0.1:8787/api/mapglb/process",
+    "method": "POST",
+    "authorization": "Optional bearer token",
+    "task": "mapglb.buildings.process",
+    "syncOutput": "buildings",
+    "asyncOutput": "jobId and statusUrl"
+  },
+  "mcp": {
+    "stdioCommand": "npm run mapglb:mcp",
+    "tools": [
+      {
+        "name": "mapglb_remote_process",
+        "description": "Send selected map bounds to a remote GPU server and return processed building geometry"
+      },
+      {
+        "name": "mapglb_export_glb",
+        "description": "Export the current 3D scene as a GLB file"
+      },
+      {
+        "name": "mapglb_set_material",
+        "description": "Change the building material preset"
+      },
+      {
+        "name": "mapglb_get_status",
+        "description": "Get current scene status"
+      }
+    ]
+  },
+  "runtime": {
+    "controlProtocol": "mcp",
+    "mcpCommand": "npm run mapglb:mcp",
+    "octocodeIntegration": true,
+    "octocodeNote": "OctoCode connects as MCP client - no special provider needed"
+  }
+}

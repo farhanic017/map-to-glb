@@ -1,0 +1,2800 @@
+{
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "file:.env.example",
+      "type": "config",
+      "name": ".env.example",
+      "filePath": ".env.example",
+      "summary": "Environment variable template exposing Google Maps API key, remote GPU endpoint, public web toggle, adapter host/port, CLI provider/model settings, and OpenCode CLI path. Serves as the canonical reference for all .env.local overrides.",
+      "tags": [
+        "config",
+        "env",
+        "vite",
+        "maps",
+        "gpu",
+        "cli",
+        "adapter"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Plain text key=value pairs. Uses VITE_ prefix for client-side Vite env exposure and MAP3D_ prefix for server-side tooling."
+    },
+    {
+      "id": "file:.gitignore",
+      "type": "config",
+      "name": ".gitignore",
+      "filePath": ".gitignore",
+      "summary": "Standard Vite/Node gitignore. Excludes logs, node_modules, dist, dist-ssr, local env files, IDE directories (.vscode except extensions.json, .idea), OS files (.DS_Store), and editor temp files.",
+      "tags": [
+        "config",
+        "gitignore",
+        "vite",
+        "node"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Gitignore pattern syntax with negation (!) for .vscode/extensions.json."
+    },
+    {
+      "id": "file:LICENSE",
+      "type": "document",
+      "name": "LICENSE",
+      "filePath": "LICENSE",
+      "summary": "MIT License, copyright 2025 cartesiancs. Grants unrestricted use, modification, distribution, and sublicensing of the software.",
+      "tags": [
+        "license",
+        "mit",
+        "legal"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Plain text legal document."
+    },
+    {
+      "id": "file:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Project documentation for map3d — a React-Three-Fiber 3D building mapping service. Covers app-first runtime, map API key configuration, remote GPU processing, realistic PBR materials, CLI/MCP/IDE integration, and roadmap. References agent-manifest.json, docs/agent-runtime.md, and .env.local configuration.",
+      "tags": [
+        "docs",
+        "readme",
+        "3d",
+        "maps",
+        "react-three-fiber",
+        "cli",
+        "mcp",
+        "gpu",
+        "osm"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Markdown with embedded HTML, fenced code blocks, and checkboxes for roadmap tracking."
+    },
+    {
+      "id": "file:agent-manifest.json",
+      "type": "config",
+      "name": "agent-manifest.json",
+      "filePath": "agent-manifest.json",
+      "summary": "Agent/IDE host manifest declaring app distribution name and version, npm commands (devApp, bigPickleAdapter, cliSchema, remoteProcess, mcpServer), remote GPU processing contract (endpoint, method, authorization, task type, sync/async output), and MCP server definition with map3d_remote_process tool.",
+      "tags": [
+        "config",
+        "agent",
+        "mcp",
+        "cli",
+        "gpu",
+        "manifest",
+        "ide"
+      ],
+      "complexity": "simple",
+      "languageNotes": "JSON with nested objects for commands, remoteGpu, and mcp sections."
+    },
+    {
+      "id": "file:eslint.config.js",
+      "type": "config",
+      "name": "eslint.config.js",
+      "filePath": "eslint.config.js",
+      "summary": "ESLint flat config using typescript-eslint. Ignores dist, node_modules, tsbuildinfo, public. Applies JS recommended + TS recommended rules. TS/TSX files get browser globals, react-hooks and react-refresh plugins with custom rules (no-explicit-any off, unused-vars warn with underscore pattern, react-refresh export warnings). MJS and config files get Node globals.",
+      "tags": [
+        "config",
+        "eslint",
+        "linting",
+        "typescript",
+        "react"
+      ],
+      "complexity": "simple",
+      "languageNotes": "ESM import/export syntax. Flat config format (ESLint 9+). Imports @eslint/js, globals, eslint-plugin-react-hooks, eslint-plugin-react-refresh, typescript-eslint."
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "summary": "Vite SPA entry point. Minimal HTML5 document with a single div#root mount point and a module script tag loading /src/main.tsx.",
+      "tags": [
+        "html",
+        "entry-point",
+        "vite",
+        "spa"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Standard HTML5 with type='module' script for Vite ESM bundling."
+    },
+    {
+      "id": "file:package-lock.json",
+      "type": "config",
+      "name": "package-lock.json",
+      "filePath": "package-lock.json",
+      "summary": "npm lockfile pinning exact dependency versions for deterministic installs. Single-line minified JSON.",
+      "tags": [
+        "config",
+        "lockfile",
+        "npm",
+        "dependencies"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Auto-generated minified JSON. Single line, very large when expanded."
+    },
+    {
+      "id": "file:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "Project manifest defining name 'map3d', ESM module type, scripts (dev, build, lint, map3d:adapter, map3d:cli, map3d:mcp, preview), production dependencies (react 19, three, @react-three/fiber 9, @react-three/drei 10, zustand 5, leaflet, axios, emotion-react, lucide-react, deventds2), and dev dependencies (vite 6, typescript 5.7, eslint 9, vite-plugin-dts, @vitejs/plugin-react).",
+      "tags": [
+        "config",
+        "package",
+        "dependencies",
+        "scripts",
+        "react",
+        "three",
+        "vite",
+        "zustand"
+      ],
+      "complexity": "simple",
+      "languageNotes": "JSON with scripts, dependencies, and devDependencies sections. Uses semver ranges for all packages."
+    },
+    {
+      "id": "file:tsconfig.app.json",
+      "type": "config",
+      "name": "tsconfig.app.json",
+      "filePath": "tsconfig.app.json",
+      "summary": "TypeScript config for application source code. Targets ES2020 with DOM libs, ESNext module/bundler resolution, react-jsx transform, @emotion/react CSS prop types and JSX import source. Strict mode disabled. Path alias @/* maps to src/*. Includes only 'src' directory.",
+      "tags": [
+        "config",
+        "typescript",
+        "emotion",
+        "path-alias",
+        "jsx"
+      ],
+      "complexity": "simple",
+      "languageNotes": "JSON with compilerOptions. Notable: jsxImportSource for emotion, path mapping for @ alias, noEmit true (bundler handles output)."
+    },
+    {
+      "id": "file:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "Root TypeScript config acting as a project references hub. Contains no files of its own, referencing tsconfig.app.json (application code) and tsconfig.node.json (tooling/config code).",
+      "tags": [
+        "config",
+        "typescript",
+        "project-references"
+      ],
+      "complexity": "simple",
+      "languageNotes": "JSON with references array — TypeScript composite project pattern for separating app and node configs."
+    },
+    {
+      "id": "file:tsconfig.node.json",
+      "type": "config",
+      "name": "tsconfig.node.json",
+      "filePath": "tsconfig.node.json",
+      "summary": "TypeScript config for Node-side tooling files (vite.config.ts). Targets ES2022 with ES2023 lib, ESNext module, bundler resolution, isolated modules. @emotion/react JSX import source. Strict mode off. Only includes vite.config.ts.",
+      "tags": [
+        "config",
+        "typescript",
+        "node",
+        "vite"
+      ],
+      "complexity": "simple",
+      "languageNotes": "JSON compilerOptions. More relaxed than app config (noFallthroughCasesInSwitch off, isolatedModules true for bundler compatibility)."
+    },
+    {
+      "id": "file:vite.config.ts",
+      "type": "config",
+      "name": "vite.config.ts",
+      "filePath": "vite.config.ts",
+      "summary": "Vite build configuration. Uses vite-plugin-dts for TypeScript declaration generation and @vitejs/plugin-react with @emotion/react babel plugin for CSS-in-JS. Sets up @ path alias resolving to /src.",
+      "tags": [
+        "config",
+        "vite",
+        "typescript",
+        "emotion",
+        "dts",
+        "react"
+      ],
+      "complexity": "simple",
+      "languageNotes": "TypeScript using ESM imports. Imports defineConfig from vite, react plugin, and dts plugin. Exports default config object."
+    },
+    {
+      "id": "file::tools/map3d-cli-adapter-server.mjs",
+      "type": "file",
+      "name": "map3d-cli-adapter-server.mjs",
+      "filePath": "tools/map3d-cli-adapter-server.mjs",
+      "summary": "HTTP adapter server that wraps CLI-based AI providers (OpenCode, custom CLI). Exposes /api/map3d/process to accept bounds, spawns a child CLI process with a building-generation prompt, parses the JSON output, and returns normalized building geometry. Runs on configurable host:port (default 127.0.0.1:8787).",
+      "tags": [
+        "server",
+        "http",
+        "cli-adapter",
+        "building-generation",
+        "ai-provider"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ESM module using node:http and node:child_process. Includes a custom JSON-from-LLM parser (extractJson) that handles markdown fences, unquoted keys, and trailing commas. Has Windows-specific OpenCode path resolution via PowerShell."
+    },
+    {
+      "id": "file::tools/map3d-cli.mjs",
+      "type": "file",
+      "name": "map3d-cli.mjs",
+      "filePath": "tools/map3d-cli.mjs",
+      "summary": "CLI client tool for communicating with a remote GPU server. Supports 'schema' (prints API schema) and 'process' (sends bounds to /api/map3d/process, polls for async results). Outputs JSON building geometry. Configured via CLI flags or environment variables (MAP3D_REMOTE_ENDPOINT, MAP3D_REMOTE_API_KEY).",
+      "tags": [
+        "cli",
+        "client",
+        "remote-gpu",
+        "building-generation",
+        "polling"
+      ],
+      "complexity": "simple",
+      "languageNotes": "ESM module using built-in fetch (Node 18+). Simple argument parser with --key value convention. Uses async polling with configurable interval and timeout."
+    },
+    {
+      "id": "file::tools/map3d-mcp.mjs",
+      "type": "file",
+      "name": "map3d-mcp.mjs",
+      "filePath": "tools/map3d-mcp.mjs",
+      "summary": "MCP (Model Context Protocol) server that exposes a 'map3d_remote_process' tool. Communicates over stdin/stdout using JSON-RPC with Content-Length framing (MCP protocol version 2024-11-05). Sends bounds to a remote GPU server, handles async polling, and returns normalized building geometry.",
+      "tags": [
+        "mcp-server",
+        "json-rpc",
+        "remote-gpu",
+        "building-generation",
+        "stdin-stdout"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ESM module implementing MCP over stdio with manual Content-Length header parsing. Buffers incoming data and extracts JSON-RPC messages. Registers a single tool with JSON Schema input validation."
+    },
+    {
+      "id": "file:.github/screenshot.png",
+      "type": "file",
+      "name": "screenshot.png",
+      "filePath": ".github/screenshot.png",
+      "summary": "Screenshot of the Map3D application showing a 3D city scene with building extrusions, road networks, and UI controls (GitHub, Options, Car Mode, Prev Step, Export GLB).",
+      "tags": [
+        "screenshot",
+        "documentation",
+        "ui-preview"
+      ],
+      "complexity": "simple",
+      "languageNotes": "PNG image data file; no code analysis possible."
+    },
+    {
+      "id": "config:.vscode/tasks.json",
+      "type": "config",
+      "name": "tasks.json",
+      "filePath": ".vscode/tasks.json",
+      "summary": "VS Code task definitions for Map3D: dev server, remote process schema, BigPickle CLI adapter, and MCP server.",
+      "tags": [
+        "vscode",
+        "tasks",
+        "ide",
+        "config"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Standard VS Code tasks.json v2.0.0 format."
+    },
+    {
+      "id": "document:docs/agent-runtime.md",
+      "type": "document",
+      "name": "agent-runtime.md",
+      "filePath": "docs/agent-runtime.md",
+      "summary": "Comprehensive documentation of the Map3D agent runtime: remote GPU contract (POST /api/map3d/process), CLI adapter, MCP stdio server, IDE integration, environment variables, and Liberation War Museum preset.",
+      "tags": [
+        "documentation",
+        "api-contract",
+        "cli",
+        "mcp",
+        "agent-runtime"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Markdown documentation with embedded JSON and HTTP examples."
+    },
+    {
+      "id": "file:public/vite.svg",
+      "type": "file",
+      "name": "vite.svg",
+      "filePath": "public/vite.svg",
+      "summary": "Vite logo SVG served as a static public asset.",
+      "tags": [
+        "svg",
+        "logo",
+        "static-asset"
+      ],
+      "complexity": "simple",
+      "languageNotes": "SVG data file."
+    },
+    {
+      "id": "file:src/api/axios.ts",
+      "type": "file",
+      "name": "axios.ts",
+      "filePath": "src/api/axios.ts",
+      "summary": "Configured Axios HTTP client instance for the Fleet API (api.fleet.cartesiancs.com) with 7-second timeout and cookie-based authentication token.",
+      "tags": [
+        "api",
+        "http-client",
+        "axios",
+        "config"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Creates a single Axios instance with baseURL, timeout, and auth header from cookies."
+    },
+    {
+      "id": "file:src/components/AppOnlyGate.tsx",
+      "type": "file",
+      "name": "AppOnlyGate.tsx",
+      "filePath": "src/components/AppOnlyGate.tsx",
+      "summary": "Gate component shown when accessing Map3D from a browser instead of the desktop app, instructing users to switch to app-first workflow.",
+      "tags": [
+        "component",
+        "ui-gate",
+        "app-first"
+      ],
+      "complexity": "simple",
+      "languageNotes": "React functional component using @emotion/react CSS-in-JS."
+    },
+    {
+      "id": "file:src/components/button/BottomButton.tsx",
+      "type": "file",
+      "name": "BottomButton.tsx",
+      "filePath": "src/components/button/BottomButton.tsx",
+      "summary": "Reusable positioned button components (NextButton, PrevButton, Button) with glassmorphism styling and show/hide toggle.",
+      "tags": [
+        "component",
+        "button",
+        "ui-primitive",
+        "glassmorphism"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Three exported React components sharing a ButtonProps interface with isShow visibility toggle."
+    },
+    {
+      "id": "file:src/components/flex/Column.tsx",
+      "type": "file",
+      "name": "Column.tsx",
+      "filePath": "src/components/flex/Column.tsx",
+      "summary": "Simple flexbox column layout component with configurable gap, justify, and height props.",
+      "tags": [
+        "component",
+        "layout",
+        "flexbox",
+        "ui-primitive"
+      ],
+      "complexity": "simple",
+      "languageNotes": "React functional component with CSS-in-JS via @emotion/react."
+    },
+    {
+      "id": "file:src/components/flex/Row.tsx",
+      "type": "file",
+      "name": "Row.tsx",
+      "filePath": "src/components/flex/Row.tsx",
+      "summary": "Simple flexbox row layout component with configurable gap, justify, and overflow props.",
+      "tags": [
+        "component",
+        "layout",
+        "flexbox",
+        "ui-primitive"
+      ],
+      "complexity": "simple",
+      "languageNotes": "React functional component using csstype Properties for overflow typing."
+    },
+    {
+      "id": "file:src/components/FullscreenModal.tsx",
+      "type": "file",
+      "name": "FullscreenModal.tsx",
+      "filePath": "src/components/FullscreenModal.tsx",
+      "summary": "Fullscreen modal overlay component with fixed positioning and blur backdrop, toggled via isOpen prop.",
+      "tags": [
+        "component",
+        "modal",
+        "overlay",
+        "ui-primitive"
+      ],
+      "complexity": "simple",
+      "languageNotes": "React functional component with display toggling via isOpen boolean."
+    },
+    {
+      "id": "file:src/components/gpu/ProviderCard.tsx",
+      "type": "file",
+      "name": "ProviderCard.tsx",
+      "filePath": "src/components/gpu/ProviderCard.tsx",
+      "summary": "Card component for displaying GPU provider details: name, cost badge, description, setup instructions (notebook or serverless), GPU types, and max buildings limit.",
+      "tags": [
+        "component",
+        "gpu-provider",
+        "ui-card"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Multiple CSS-in-JS style objects; conditional rendering based on provider type (notebook vs serverless)."
+    },
+    {
+      "id": "file:src/components/gpu/ProviderSelector.tsx",
+      "type": "file",
+      "name": "ProviderSelector.tsx",
+      "filePath": "src/components/gpu/ProviderSelector.tsx",
+      "summary": "Dropdown selector for GPU providers grouped by type (notebook/serverless/dedicated), with ProviderCard detail view on selection.",
+      "tags": [
+        "component",
+        "gpu-provider",
+        "selector",
+        "dropdown"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses getProviders() from registry, groups providers by type with reduce."
+    },
+    {
+      "id": "file:src/components/map/Processing.tsx",
+      "type": "file",
+      "name": "Processing.tsx",
+      "filePath": "src/components/map/Processing.tsx",
+      "summary": "Building data display component showing a list of buildings with IDs, height tags, and geometry coordinates. Exports the Building interface used across the project.",
+      "tags": [
+        "component",
+        "building-data",
+        "interface",
+        "processing"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exports Building interface (id, tags, geometry) and BuildingHeights display component."
+    },
+    {
+      "id": "file:src/components/map/SelectMap.tsx",
+      "type": "file",
+      "name": "SelectMap.tsx",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Core map selection component (2409 lines): multi-provider tile map (Leaflet for OSM/CARTO/Esri/MapTiler/Mapbox, Google Maps API), rectangle region selector, Nominatim geocoding, OSRM routing, popular places via Overpass API, favorites, recent searches, API key management, Liberation War Museum preset. Exports MapComponent and several utility functions.",
+      "tags": [
+        "component",
+        "map",
+        "leaflet",
+        "google-maps",
+        "geocoding",
+        "routing",
+        "core"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Largest file in project. Contains RectangleSelector, LeafletMapSelector, GoogleMapSelector, OSMMapTools, ApiKeyEntry, MapComponent sub-components plus ~15 helper functions. Uses React hooks extensively with leaflet and google-maps APIs."
+    },
+    {
+      "id": "file:src/components/modal/Modal.tsx",
+      "type": "file",
+      "name": "Modal.tsx",
+      "filePath": "src/components/modal/Modal.tsx",
+      "summary": "Animated modal dialog with fade-in/out transitions, backdrop brightness effect, click-outside-to-close, and optional scrollable content.",
+      "tags": [
+        "component",
+        "modal",
+        "dialog",
+        "animation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses CSS keyframe animations for open/close transitions; manages animation state with React hooks."
+    },
+    {
+      "id": "file:src/components/nav/TopNav.tsx",
+      "type": "file",
+      "name": "TopNav.tsx",
+      "filePath": "src/components/nav/TopNav.tsx",
+      "summary": "Top navigation bar with branding, GitHub link, Options modal (compute runtime, material preset, texture, height scale, heightmap settings), and Car Mode toggle. Exports NavButton component.",
+      "tags": [
+        "component",
+        "navigation",
+        "settings",
+        "toolbar"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Reads from three Zustand stores (carStore, sceneStore, runtimeStore); contains a large options modal with multiple settings sections."
+    },
+    {
+      "id": "file:src/components/text/Description.tsx",
+      "type": "file",
+      "name": "Description.tsx",
+      "filePath": "src/components/text/Description.tsx",
+      "summary": "Simple text component for descriptive/secondary text with theme color from DESC_COLOR.",
+      "tags": [
+        "component",
+        "text",
+        "ui-primitive"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Minimal wrapper component."
+    },
+    {
+      "id": "file:src/components/text/Title.tsx",
+      "type": "file",
+      "name": "Title.tsx",
+      "filePath": "src/components/text/Title.tsx",
+      "summary": "Simple text component for section titles with theme color from SUBTITLE_COLOR.",
+      "tags": [
+        "component",
+        "text",
+        "ui-primitive"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Minimal wrapper component."
+    },
+    {
+      "id": "file:src/global.d.ts",
+      "type": "file",
+      "name": "global.d.ts",
+      "filePath": "src/global.d.ts",
+      "summary": "Global TypeScript declarations: augments Window with optional google property and JSX.IntrinsicElements with three-line element type for React-Three-Fiber.",
+      "tags": [
+        "types",
+        "global",
+        "three-js",
+        "jsx"
+      ],
+      "complexity": "simple",
+      "languageNotes": "TypeScript declaration file extending global Window and JSX namespaces."
+    },
+    {
+      "id": "file:src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "src/index.css",
+      "summary": "Global CSS: imports Pretendard font, resets html/body/root to full height/width, disables user-select and overflow, hides scrollbars.",
+      "tags": [
+        "css",
+        "global-styles",
+        "reset",
+        "font"
+      ],
+      "complexity": "simple",
+      "languageNotes": "CSS file with @import for external font CDN and global reset rules."
+    },
+    {
+      "id": "file:src/main.tsx",
+      "type": "file",
+      "name": "main.tsx",
+      "filePath": "src/main.tsx",
+      "summary": "Application entry point: imports global CSS, mounts the App component into the root DOM element using React 18 createRoot.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "react-dom"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Standard React 18 entry point using createRoot API."
+    },
+    {
+      "id": "file:src/providers/colab.ts",
+      "type": "file",
+      "name": "colab.ts",
+      "filePath": "src/providers/colab.ts",
+      "summary": "Google Colab GPU provider implementation: free tier, notebook-based, requires ngrok endpoint, supports T4/A100 GPUs, up to 5000 buildings.",
+      "tags": [
+        "provider",
+        "gpu",
+        "colab",
+        "notebook"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Implements GPUProvider interface with normalizeBuildings helper for response parsing."
+    },
+    {
+      "id": "file:src/providers/custom.ts",
+      "type": "file",
+      "name": "custom.ts",
+      "filePath": "src/providers/custom.ts",
+      "summary": "Custom endpoint GPU provider: generic serverless provider that works with any server implementing the /api/map3d/process contract.",
+      "tags": [
+        "provider",
+        "gpu",
+        "custom",
+        "serverless"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Implements GPUProvider interface; supports optional Bearer token auth."
+    },
+    {
+      "id": "file:src/providers/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "src/providers/index.ts",
+      "summary": "Provider barrel export: re-exports all GPU provider types, registry functions, and individual provider instances (colab, kaggle, runpod, modal, vastai, paperspace, lightning, custom).",
+      "tags": [
+        "barrel",
+        "export",
+        "providers"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Pure re-export file with no logic."
+    },
+    {
+      "id": "file:src/providers/kaggle.ts",
+      "type": "file",
+      "name": "kaggle.ts",
+      "filePath": "src/providers/kaggle.ts",
+      "summary": "Kaggle Notebooks GPU provider: free tier, P100/T4x2 GPUs, up to 3000 buildings, requires ngrok endpoint.",
+      "tags": [
+        "provider",
+        "gpu",
+        "kaggle",
+        "notebook"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Implements GPUProvider interface with normalizeBuildings helper; nearly identical structure to colab.ts."
+    },
+    {
+      "id": "function:src/api/axios.ts:instanceFleet",
+      "type": "function",
+      "name": "instanceFleet",
+      "filePath": "src/api/axios.ts",
+      "summary": "Pre-configured Axios instance with Fleet API base URL, 7s timeout, and auth cookie header.",
+      "tags": [
+        "http-client",
+        "api",
+        "instance"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exported as default."
+    },
+    {
+      "id": "function:src/components/button/BottomButton.tsx:NextButton",
+      "type": "function",
+      "name": "NextButton",
+      "filePath": "src/components/button/BottomButton.tsx",
+      "summary": "Bottom-right positioned button with visibility toggle for forward navigation.",
+      "tags": [
+        "button",
+        "navigation",
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exported React component."
+    },
+    {
+      "id": "function:src/components/button/BottomButton.tsx:PrevButton",
+      "type": "function",
+      "name": "PrevButton",
+      "filePath": "src/components/button/BottomButton.tsx",
+      "summary": "Bottom-left positioned button with visibility toggle for backward navigation.",
+      "tags": [
+        "button",
+        "navigation",
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exported React component."
+    },
+    {
+      "id": "function:src/components/button/BottomButton.tsx:Button",
+      "type": "function",
+      "name": "Button",
+      "filePath": "src/components/button/BottomButton.tsx",
+      "summary": "Non-positioned button with visibility toggle for general-purpose actions.",
+      "tags": [
+        "button",
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exported React component."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "type": "function",
+      "name": "MapComponent",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Main exported map component: manages map provider selection, favorites, API keys, rectangle drawing, and routes to Leaflet or Google Maps implementation.",
+      "tags": [
+        "component",
+        "map",
+        "core",
+        "exported"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Main public API of SelectMap.tsx; orchestrates all sub-components."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:RectangleSelector",
+      "type": "function",
+      "name": "RectangleSelector",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Leaflet map interaction handler for drawing rectangle selections with mouse and touch support.",
+      "tags": [
+        "leaflet",
+        "interaction",
+        "rectangle",
+        "internal"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Uses useMapEvents hook; handles mouse and touch events for drag selection."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:LeafletMapSelector",
+      "type": "function",
+      "name": "LeafletMapSelector",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Leaflet-based map container with tile layer, search tools, rectangle selector, and route display.",
+      "tags": [
+        "leaflet",
+        "map",
+        "internal"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Renders MapContainer, TileLayer, RectangleSelector, and OSMMapTools."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "type": "function",
+      "name": "GoogleMapSelector",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Google Maps-based map container with rectangle drawing, search, geocoding, routing via DirectionsService/Renderer.",
+      "tags": [
+        "google-maps",
+        "map",
+        "internal"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Uses Google Maps JavaScript API directly; manages map/rectangle/marker refs."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "type": "function",
+      "name": "OSMMapTools",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Search, geocoding, routing, and popular places UI panel overlaid on the Leaflet map.",
+      "tags": [
+        "search",
+        "geocoding",
+        "routing",
+        "leaflet",
+        "internal"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Contains Nominatim suggestions, OSRM routing, Overpass popular places, and recent searches."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:geocodeWithNominatim",
+      "type": "function",
+      "name": "geocodeWithNominatim",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Geocodes a text query to lat/lng coordinates using the Nominatim OpenStreetMap API.",
+      "tags": [
+        "geocoding",
+        "nominatim",
+        "api"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Async function using cachedJson for request caching."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:searchNominatimSuggestions",
+      "type": "function",
+      "name": "searchNominatimSuggestions",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Returns search suggestions from Nominatim with optional map-bias viewbox and deduplication.",
+      "tags": [
+        "geocoding",
+        "suggestions",
+        "nominatim",
+        "api"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Runs global and biased searches in parallel, merges with static completions, deduplicates."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:fetchPopularPlaces",
+      "type": "function",
+      "name": "fetchPopularPlaces",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Fetches popular tourist/amenity places near a center point via Overpass API with fallback endpoints and scoring.",
+      "tags": [
+        "overpass-api",
+        "popular-places",
+        "api",
+        "fallback"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Tries multiple Overpass endpoints; scores results by tourism/amenity type; cached with localStorage."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:fetchOsrmRoute",
+      "type": "function",
+      "name": "fetchOsrmRoute",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Fetches a driving route between two points using the OSRM demo server.",
+      "tags": [
+        "routing",
+        "osrm",
+        "api"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Async function using cachedJson; returns array of lat/lng points."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:loadGoogleMaps",
+      "type": "function",
+      "name": "loadGoogleMaps",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Dynamically loads the Google Maps JavaScript API script with deduplication and singleton promise.",
+      "tags": [
+        "google-maps",
+        "dynamic-loading",
+        "singleton"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses script injection with data attribute for dedup; caches promise globally."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:getBrowserLocation",
+      "type": "function",
+      "name": "getBrowserLocation",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Returns the user's current geolocation via the browser Geolocation API.",
+      "tags": [
+        "geolocation",
+        "browser-api"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Wraps navigator.geolocation.getCurrentPosition in a Promise."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:getRecentSearches",
+      "type": "function",
+      "name": "getRecentSearches",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Retrieves recent search history from localStorage with validation.",
+      "tags": [
+        "persistence",
+        "localStorage",
+        "search-history"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Parses JSON from localStorage; validates array of MapPoint objects."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:rememberRecentSearch",
+      "type": "function",
+      "name": "rememberRecentSearch",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Adds a search point to the recent searches list, deduplicating by lat/lng/label and capping at 8 entries.",
+      "tags": [
+        "persistence",
+        "localStorage",
+        "search-history"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Updates localStorage and returns the updated list."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:buildLeafletTileProvider",
+      "type": "function",
+      "name": "buildLeafletTileProvider",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Constructs a Leaflet tile provider config from the definition, resolving API-key-based URLs.",
+      "tags": [
+        "leaflet",
+        "tile-provider",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Resolves URL function vs string from LeafletTileProviderDefinition."
+    },
+    {
+      "id": "function:src/components/map/SelectMap.tsx:getInitialApiKeys",
+      "type": "function",
+      "name": "getInitialApiKeys",
+      "filePath": "src/components/map/SelectMap.tsx",
+      "summary": "Reads initial API keys from localStorage and Vite environment variables for Google, MapTiler, and Mapbox.",
+      "tags": [
+        "config",
+        "api-keys",
+        "localStorage"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Falls back to VITE_GOOGLE_MAPS_API_KEY env var for Google."
+    },
+    {
+      "id": "function:src/components/nav/TopNav.tsx:TopNav",
+      "type": "function",
+      "name": "TopNav",
+      "filePath": "src/components/nav/TopNav.tsx",
+      "summary": "Main top navigation component with branding, options modal (compute, material, height, heightmap settings), and car mode toggle.",
+      "tags": [
+        "navigation",
+        "settings",
+        "toolbar",
+        "component"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Reads/writes to carStore, sceneStore, and runtimeStore via Zustand hooks."
+    },
+    {
+      "id": "function:src/components/nav/TopNav.tsx:NavButton",
+      "type": "function",
+      "name": "NavButton",
+      "filePath": "src/components/nav/TopNav.tsx",
+      "summary": "Styled navigation button with glassmorphism and visibility toggle.",
+      "tags": [
+        "button",
+        "navigation",
+        "component"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exported React component."
+    },
+    {
+      "id": "function:src/components/modal/Modal.tsx:Modal",
+      "type": "function",
+      "name": "Modal",
+      "filePath": "src/components/modal/Modal.tsx",
+      "summary": "Animated modal dialog with open/close CSS transitions and click-outside dismissal.",
+      "tags": [
+        "modal",
+        "dialog",
+        "animation",
+        "component"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Manages animation state via useEffect; uses keyframe animations."
+    },
+    {
+      "id": "class:src/components/map/Processing.tsx:Building",
+      "type": "class",
+      "name": "Building",
+      "filePath": "src/components/map/Processing.tsx",
+      "summary": "Interface for building data: id, tags record, and optional geometry (lat/lng coordinate array). Used across providers and map components.",
+      "tags": [
+        "interface",
+        "data-model",
+        "building",
+        "shared"
+      ],
+      "complexity": "simple",
+      "languageNotes": "TypeScript interface exported from Processing.tsx."
+    },
+    {
+      "id": "class:src/providers/colab.ts:colabProvider",
+      "type": "class",
+      "name": "colabProvider",
+      "filePath": "src/providers/colab.ts",
+      "summary": "GPUProvider implementation for Google Colab: free notebook tier, T4/A100 GPUs, 5000 building limit.",
+      "tags": [
+        "provider",
+        "gpu",
+        "colab",
+        "implementation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Implements GPUProvider interface with getEndpoint, getHeaders, buildRequestBody, parseResponse."
+    },
+    {
+      "id": "class:src/providers/custom.ts:customProvider",
+      "type": "class",
+      "name": "customProvider",
+      "filePath": "src/providers/custom.ts",
+      "summary": "GPUProvider implementation for custom user-defined endpoints: serverless, optional Bearer auth.",
+      "tags": [
+        "provider",
+        "gpu",
+        "custom",
+        "implementation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Implements GPUProvider interface."
+    },
+    {
+      "id": "class:src/providers/kaggle.ts:kaggleProvider",
+      "type": "class",
+      "name": "kaggleProvider",
+      "filePath": "src/providers/kaggle.ts",
+      "summary": "GPUProvider implementation for Kaggle Notebooks: free tier, P100/T4x2 GPUs, 3000 building limit.",
+      "tags": [
+        "provider",
+        "gpu",
+        "kaggle",
+        "implementation"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Implements GPUProvider interface; nearly identical to colabProvider."
+    },
+    {
+      "id": "file:src/providers/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "src/providers/types.ts",
+      "summary": "Core type definitions for the GPU provider system: GPUProvider interface, ProviderConfig, BoundsPayload, ProviderType, and ProviderCost types.",
+      "tags": [
+        "types",
+        "gpu-provider",
+        "interface"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Defines the GPUProvider interface with methods getEndpoint, getHeaders, buildRequestBody, parseResponse, plus related types BoundsPayload, ProviderType, ProviderCost, ProviderConfig."
+    },
+    {
+      "id": "function:src/providers/types.ts:GPUProvider",
+      "type": "function",
+      "name": "GPUProvider",
+      "filePath": "src/providers/types.ts",
+      "summary": "Interface defining a GPU compute provider with endpoint construction, request building, and response parsing capabilities.",
+      "tags": [
+        "interface",
+        "gpu-provider",
+        "strategy-pattern"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Interface with properties: id, name, description, type (notebook/serverless/dedicated), requiresApiKey, requiresEndpoint, gpuTypes, maxBuildings, and methods: getEndpoint, getHeaders, buildRequestBody, parseResponse."
+    },
+    {
+      "id": "function:src/providers/types.ts:ProviderConfig",
+      "type": "function",
+      "name": "ProviderConfig",
+      "filePath": "src/providers/types.ts",
+      "summary": "Configuration type for GPU providers containing endpoint URL, API key, and optional custom settings.",
+      "tags": [
+        "type",
+        "config"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Simple interface with endpoint: string, apiKey: string, customSettings?: Record<string, string>."
+    },
+    {
+      "id": "function:src/providers/types.ts:BoundsPayload",
+      "type": "function",
+      "name": "BoundsPayload",
+      "filePath": "src/providers/types.ts",
+      "summary": "Geographic bounding box type with south/west/north/east coordinates.",
+      "tags": [
+        "type",
+        "geography"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Type with south, west, north, east number fields."
+    },
+    {
+      "id": "file:src/providers/registry.ts",
+      "type": "file",
+      "name": "registry.ts",
+      "filePath": "src/providers/registry.ts",
+      "summary": "Central GPU provider registry that aggregates all provider implementations and provides lookup/filter functions.",
+      "tags": [
+        "registry",
+        "gpu-provider",
+        "factory"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Imports all 8 provider implementations (colab, kaggle, runpod, modal, vastai, paperspace, lightning, custom) into a providers array. Exports getProviders, getProvider, getProvidersByType, getFreeProviders, getProviderIds."
+    },
+    {
+      "id": "file:src/providers/lightning.ts",
+      "type": "file",
+      "name": "lightning.ts",
+      "filePath": "src/providers/lightning.ts",
+      "summary": "Lightning AI GPU provider implementation for dedicated GPU compute with enterprise-grade features.",
+      "tags": [
+        "gpu-provider",
+        "dedicated",
+        "lightning-ai"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports lightningProvider: GPUProvider with id='lightning', type='dedicated', requiresApiKey, requiresEndpoint, gpuTypes=[T4, A10G, A100, H100], maxBuildings=10000. Includes normalizeBuildings helper and implements all GPUProvider methods."
+    },
+    {
+      "id": "file:src/providers/modal.ts",
+      "type": "file",
+      "name": "modal.ts",
+      "filePath": "src/providers/modal.ts",
+      "summary": "Modal GPU provider implementation for serverless GPU compute with automatic scaling.",
+      "tags": [
+        "gpu-provider",
+        "serverless",
+        "modal"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports modalProvider: GPUProvider with id='modal', type='serverless', gpuTypes=[T4, A10G, A100, H100], maxBuildings=8000. Same normalizeBuildings pattern as other providers."
+    },
+    {
+      "id": "file:src/providers/paperspace.ts",
+      "type": "file",
+      "name": "paperspace.ts",
+      "filePath": "src/providers/paperspace.ts",
+      "summary": "Paperspace GPU provider implementation for dedicated GPU compute for sustained workloads.",
+      "tags": [
+        "gpu-provider",
+        "dedicated",
+        "paperspace"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports paperspaceProvider: GPUProvider with id='paperspace', type='dedicated', gpuTypes=[M4000, P5000, P6000, V100, A100], maxBuildings=8000."
+    },
+    {
+      "id": "file:src/providers/runpod.ts",
+      "type": "file",
+      "name": "runpod.ts",
+      "filePath": "src/providers/runpod.ts",
+      "summary": "RunPod GPU provider implementation for serverless GPU pods with pay-per-use pricing.",
+      "tags": [
+        "gpu-provider",
+        "serverless",
+        "runpod"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports runpodProvider: GPUProvider with id='runpod', type='serverless', defaultEndpoint='https://api.runpod.io', gpuTypes=[A40, A100, A100 80GB, H100], maxBuildings=10000."
+    },
+    {
+      "id": "file:src/providers/vastai.ts",
+      "type": "file",
+      "name": "vastai.ts",
+      "filePath": "src/providers/vastai.ts",
+      "summary": "Vast.ai GPU provider implementation as a marketplace for cheap GPU compute.",
+      "tags": [
+        "gpu-provider",
+        "serverless",
+        "marketplace"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports vastaiProvider: GPUProvider with id='vastai', type='serverless', gpuTypes=[GTX 1080, RTX 2080, RTX 3090, A100], maxBuildings=6000."
+    },
+    {
+      "id": "file:src/state/areaStore.ts",
+      "type": "file",
+      "name": "areaStore.ts",
+      "filePath": "src/state/areaStore.ts",
+      "summary": "Zustand store for map area data: stores OSM feature arrays and center coordinates for the 3D view.",
+      "tags": [
+        "state",
+        "zustand",
+        "map",
+        "areas"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Creates useAreaStore with areas: any[], center: lat/lng array, appendAreas, clearAreas, setCenter. Default center is NYC area (40.8, -73.95)."
+    },
+    {
+      "id": "file:src/state/carStore.ts",
+      "type": "file",
+      "name": "carStore.ts",
+      "filePath": "src/state/carStore.ts",
+      "summary": "Zustand store for car camera mode: toggles third-person follow camera.",
+      "tags": [
+        "state",
+        "zustand",
+        "camera"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Creates useCarStore with thirdMode: boolean and setThirdMode action."
+    },
+    {
+      "id": "file:src/state/exportStore.ts",
+      "type": "file",
+      "name": "exportStore.ts",
+      "filePath": "src/state/exportStore.ts",
+      "summary": "Zustand store for GLB/Fleet export actions: tracks export trigger state and fleet target space.",
+      "tags": [
+        "state",
+        "zustand",
+        "export"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Creates useActionStore with action: boolean, fleetSpaceId: string, exportType: 'glb' | 'fleet', setAction, setFleet actions."
+    },
+    {
+      "id": "file:src/state/runtimeStore.ts",
+      "type": "file",
+      "name": "runtimeStore.ts",
+      "filePath": "src/state/runtimeStore.ts",
+      "summary": "Zustand store for runtime compute configuration: local vs remote mode, GPU endpoint/API key, agent mode, provider configs. Persists to localStorage.",
+      "tags": [
+        "state",
+        "zustand",
+        "runtime",
+        "persistence"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Creates useRuntimeStore with computeMode ('local'|'remote'), remoteEndpoint, remoteApiKey, agentMode, selectedProvider, providerConfigs. Uses localStorage for persistence with storageKeys map. Reads VITE_REMOTE_GPU_ENDPOINT env var."
+    },
+    {
+      "id": "file:src/state/sceneStore.ts",
+      "type": "file",
+      "name": "sceneStore.ts",
+      "filePath": "src/state/sceneStore.ts",
+      "summary": "Zustand store for 3D scene rendering parameters: material presets, height scaling, texture toggle, heightmap settings.",
+      "tags": [
+        "state",
+        "zustand",
+        "3d-scene",
+        "rendering"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Creates useSceneStore with materialPreset (BuildingMaterialPreset), textureEnabled, heightScale, defaultHeight, levelHeight, heightmapEnabled, heightmapStrength. Exports BuildingMaterialPreset type with 8 preset options."
+    },
+    {
+      "id": "file:src/theme/color.ts",
+      "type": "file",
+      "name": "color.ts",
+      "filePath": "src/theme/color.ts",
+      "summary": "UI color constants for borders, subtitles, descriptions, and action icons.",
+      "tags": [
+        "theme",
+        "colors",
+        "constants"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exports BORDER_COLOR, SUBTITLE_COLOR, DESC_COLOR, ACTION_ICON_COLOR as hex/alpha strings."
+    },
+    {
+      "id": "file:src/three/Car.tsx",
+      "type": "file",
+      "name": "Car.tsx",
+      "filePath": "src/three/Car.tsx",
+      "summary": "React Three Fiber component for a driveable car with WASD controls, pointer lock for mouse rotation, and optional third-person follow camera.",
+      "tags": [
+        "3d-component",
+        "react-three-fiber",
+        "input",
+        "camera"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Default export Car component using useRef, useFrame, useThree from @react-three/fiber. Implements keyboard-driven velocity/acceleration, pointer lock mouse look, and camera lerp for third-person mode. Renders a simple orange box as car mesh."
+    },
+    {
+      "id": "file:src/three/Space.tsx",
+      "type": "file",
+      "name": "Space.tsx",
+      "filePath": "src/three/Space.tsx",
+      "summary": "Main 3D scene orchestrator (2703 lines): renders buildings with procedural textures, roads, water, parks, street furniture, terrain, sky, and GLB export. Core of the 3D map visualization.",
+      "tags": [
+        "3d-component",
+        "react-three-fiber",
+        "scene",
+        "buildings",
+        "textures",
+        "export"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports Space (main Canvas scene), Export (GLB export component), plus internal Building, MapContextFeatures, Heightmap components. Contains ~40 helper functions for texture generation, material presets, road/surface/water rendering, facade detail drawing. Uses deviceBrain for tier-based quality. Procedurally generates facade/roof/asphalt/paver/terrain textures via Canvas2D."
+    },
+    {
+      "id": "function:src/three/Space.tsx:Space",
+      "type": "function",
+      "name": "Space",
+      "filePath": "src/three/Space.tsx",
+      "summary": "Main exported component: sets up the React Three Fiber Canvas with lighting, heightmap, building rendering, map context features, car, export handler, sky, and environment.",
+      "tags": [
+        "3d-component",
+        "canvas",
+        "scene-root"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Reads from useAreaStore and useSceneStore. Projects lat/lng to 3D coordinates. Renders buildings, terrain, map features, car, sky, and environment based on device tier."
+    },
+    {
+      "id": "function:src/three/Space.tsx:Export",
+      "type": "function",
+      "name": "Export",
+      "filePath": "src/three/Space.tsx",
+      "summary": "Handles GLB export of the 3D scene: traverses the scene graph, clones exportable objects, and triggers file download or Fleet upload.",
+      "tags": [
+        "export",
+        "glb",
+        "threejs"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses GLTFExporter from three/examples. Traverses scene for userData.exportToGLB=true nodes. Supports both file download and Fleet API upload paths."
+    },
+    {
+      "id": "file:src/ui/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "src/ui/App.tsx",
+      "summary": "Main application component (805 lines): 3-step wizard UI (map selection, processing, 3D scene), OSM data fetching with multi-endpoint fallback, local/remote compute routing, and export modal.",
+      "tags": [
+        "ui",
+        "app",
+        "wizard",
+        "osm",
+        "data-fetching"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Exports App (wrapper with public website gate) and internal Map3DApp. Implements fetchOverpassJson with cached requests across 4 Overpass endpoints, requestBuildings with local/remote branching, preview building generation, and step-based UI flow. Uses Emotion CSS for styling."
+    },
+    {
+      "id": "file:src/utils/appDistribution.ts",
+      "type": "file",
+      "name": "appDistribution.ts",
+      "filePath": "src/utils/appDistribution.ts",
+      "summary": "Controls public website access: blocks access when VITE_DISABLE_PUBLIC_WEB is true, except for localhost or ?app=1 query parameter.",
+      "tags": [
+        "config",
+        "access-control",
+        "distribution"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exports shouldBlockPublicWebsite(). Checks VITE_DISABLE_PUBLIC_WEB env var, excludes localhost/127.0.0.1/::1 and ?app=1 URL param."
+    },
+    {
+      "id": "file:src/utils/cookie.ts",
+      "type": "file",
+      "name": "cookie.ts",
+      "filePath": "src/utils/cookie.ts",
+      "summary": "Cookie utility functions: parse all cookies, get specific cookie, set cookie with expiry.",
+      "tags": [
+        "utility",
+        "cookies",
+        "browser"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exports getCookies() (parses document.cookie), getCookie(key), setCookie(key, value, expDays). All wrapped in try/catch for locked-down browsers."
+    },
+    {
+      "id": "file:src/utils/deviceBrain.ts",
+      "type": "file",
+      "name": "deviceBrain.ts",
+      "filePath": "src/utils/deviceBrain.ts",
+      "summary": "Device capability profiler: detects hardware tier (low/balanced/high) based on cores, memory, connection, and sets quality parameters for the 3D renderer.",
+      "tags": [
+        "utility",
+        "device-detection",
+        "performance",
+        "tier"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports DeviceBrainTier type, DeviceBrainProfile type, getDeviceBrainProfile() (cached singleton), limitForDevice<T>(). Profiles navigator.hardwareConcurrency, deviceMemory, connection.effectiveType. Sets maxBuildings, maxRoads, terrainSegments, pixelRatio, cacheTtlMs, requestTimeoutMs per tier."
+    },
+    {
+      "id": "file:src/utils/locationMemory.ts",
+      "type": "file",
+      "name": "locationMemory.ts",
+      "filePath": "src/utils/locationMemory.ts",
+      "summary": "Persists last-used map location to localStorage: get/set for lat/lng/label coordinates.",
+      "tags": [
+        "utility",
+        "persistence",
+        "location",
+        "localStorage"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Exports getSavedMapLocation(), saveMapLocation(). Falls back to NYC (40.8, -73.95). Uses localStorage with try/catch for private windows."
+    },
+    {
+      "id": "file:src/utils/remoteCompute.ts",
+      "type": "file",
+      "name": "remoteCompute.ts",
+      "filePath": "src/utils/remoteCompute.ts",
+      "summary": "Remote GPU building processing client: sends building process requests to external GPU endpoints with async polling for job completion.",
+      "tags": [
+        "utility",
+        "gpu",
+        "remote",
+        "async",
+        "polling"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports requestRemoteBuildings({ endpoint, apiKey, bounds, deviceProfile }). Posts to /api/map3d/process, polls statusUrl with 2.5s interval, 4min timeout. Normalizes buildings/elements response formats. Uses postJson/getJson helpers with Bearer auth."
+    },
+    {
+      "id": "file:src/utils/requestCache.ts",
+      "type": "file",
+      "name": "requestCache.ts",
+      "filePath": "src/utils/requestCache.ts",
+      "summary": "Dual-layer JSON request cache: in-memory Map + localStorage bucket with TTL, deduplication of inflight requests, and automatic eviction.",
+      "tags": [
+        "utility",
+        "cache",
+        "performance",
+        "localStorage"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Exports cachedJson<T>() and fetchJsonWithTimeout<T>(). cachedJson uses hashKey for bucketing, checks memory then localStorage, deduplicates inflight promises. fetchJsonWithTimeout uses AbortController for timeout. Bucket auto-evicts expired entries and caps at maxEntries."
+    },
+    {
+      "id": "file:src/vite-env.d.ts",
+      "type": "file",
+      "name": "vite-env.d.ts",
+      "filePath": "src/vite-env.d.ts",
+      "summary": "Vite client type reference declaration.",
+      "tags": [
+        "types",
+        "vite",
+        "declaration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Single line: /// <reference types=\"vite/client\" />. Provides Vite-specific type augmentations."
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.env.example",
+      "target": "file:README.md",
+      "relation": "documents",
+      "label": "README references .env.example for Google Maps and remote GPU preconfiguration",
+      "direction": "forward"
+    },
+    {
+      "source": "file:agent-manifest.json",
+      "target": "file:README.md",
+      "relation": "documents",
+      "label": "README documents agent manifest commands and MCP integration",
+      "direction": "forward"
+    },
+    {
+      "source": "file:agent-manifest.json",
+      "target": "file:package.json",
+      "relation": "references",
+      "label": "Manifest commands map to npm scripts defined in package.json",
+      "direction": "forward"
+    },
+    {
+      "source": "file:package.json",
+      "target": "file:index.html",
+      "relation": "configures",
+      "label": "package.json scripts (dev, build) drive Vite which uses index.html as entry",
+      "direction": "forward"
+    },
+    {
+      "source": "file:index.html",
+      "target": "file:vite.config.ts",
+      "relation": "configured-by",
+      "label": "index.html is processed by Vite using vite.config.ts plugin and alias settings",
+      "direction": "forward"
+    },
+    {
+      "source": "file:eslint.config.js",
+      "target": "file:package.json",
+      "relation": "references",
+      "label": "ESLint config imports plugins listed in package.json devDependencies",
+      "direction": "forward"
+    },
+    {
+      "source": "file:vite.config.ts",
+      "target": "file:package.json",
+      "relation": "references",
+      "label": "Vite config imports from packages declared in package.json dependencies",
+      "direction": "forward"
+    },
+    {
+      "source": "file:vite.config.ts",
+      "target": "file:tsconfig.node.json",
+      "relation": "compiled-by",
+      "label": "tsconfig.node.json is scoped to compile only vite.config.ts",
+      "direction": "forward"
+    },
+    {
+      "source": "file:tsconfig.json",
+      "target": "file:tsconfig.app.json",
+      "relation": "references",
+      "label": "Root tsconfig references app config for source compilation",
+      "direction": "forward"
+    },
+    {
+      "source": "file:tsconfig.json",
+      "target": "file:tsconfig.node.json",
+      "relation": "references",
+      "label": "Root tsconfig references node config for tooling compilation",
+      "direction": "forward"
+    },
+    {
+      "source": "file:tsconfig.app.json",
+      "target": "file:package.json",
+      "relation": "references",
+      "label": "App tsconfig type-checks src code; dependencies like @emotion/react provide types",
+      "direction": "forward"
+    },
+    {
+      "source": "file:.env.example",
+      "target": "file:agent-manifest.json",
+      "relation": "configures",
+      "label": "Env vars (MAP3D_ADAPTER_HOST, MAP3D_ADAPTER_PORT) configure the remote GPU endpoint defined in agent-manifest",
+      "direction": "forward"
+    },
+    {
+      "source": "file:LICENSE",
+      "target": "file:README.md",
+      "relation": "references",
+      "label": "README states MIT License, matching LICENSE file content and copyright holder (cartesiancs)",
+      "direction": "forward"
+    },
+    {
+      "source": "file::tools/map3d-cli.mjs",
+      "target": "file::tools/map3d-cli-adapter-server.mjs",
+      "relation": "communicates-with",
+      "label": "CLI client sends POST to adapter server's /api/map3d/process endpoint",
+      "direction": "forward"
+    },
+    {
+      "source": "file::tools/map3d-mcp.mjs",
+      "target": "file::tools/map3d-cli-adapter-server.mjs",
+      "relation": "communicates-with",
+      "label": "MCP server sends POST to adapter server's /api/map3d/process endpoint",
+      "direction": "forward"
+    },
+    {
+      "source": "file::tools/map3d-cli-adapter-server.mjs",
+      "target": "file::tools/map3d-cli.mjs",
+      "relation": "shares-logic-with",
+      "label": "Both implement identical normalizeBuildings, buildProcessUrl, resolveStatusUrl, postJson, getJson, and requestRemoteBuildings functions (code duplication)",
+      "direction": "forward"
+    },
+    {
+      "source": "file::tools/map3d-cli-adapter-server.mjs",
+      "target": "file::tools/map3d-mcp.mjs",
+      "relation": "shares-logic-with",
+      "label": "Both implement identical normalizeBuildings, buildProcessUrl, resolveStatusUrl, postJson, getJson, and requestRemoteBuildings functions (code duplication)",
+      "direction": "forward"
+    },
+    {
+      "source": "file::tools/map3d-cli.mjs",
+      "target": "file::tools/map3d-mcp.mjs",
+      "relation": "shares-logic-with",
+      "label": "Both are remote clients that talk to the adapter server; nearly identical async polling logic and building normalization",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/api/axios.ts",
+      "target": "file:.github/screenshot.png",
+      "type": "related",
+      "weight": 0.3,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/AppOnlyGate.tsx",
+      "target": "file:src/components/flex/Column.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/AppOnlyGate.tsx",
+      "target": "file:src/components/text/Title.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/AppOnlyGate.tsx",
+      "target": "file:src/components/text/Description.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderCard.tsx",
+      "target": "class:src/providers/colab.ts:colabProvider",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderSelector.tsx",
+      "target": "file:src/components/gpu/ProviderCard.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderSelector.tsx",
+      "target": "file:src/providers/index.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "file:src/components/map/Processing.tsx",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/modal/Modal.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/flex/Column.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/text/Title.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/text/Description.tsx",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/main.tsx",
+      "target": "file:src/index.css",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/colab.ts",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/custom.ts",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/kaggle.ts",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/index.ts",
+      "target": "file:src/providers/colab.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/index.ts",
+      "target": "file:src/providers/kaggle.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/index.ts",
+      "target": "file:src/providers/custom.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/colab.ts",
+      "target": "class:src/providers/colab.ts:colabProvider",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/custom.ts",
+      "target": "class:src/providers/custom.ts:customProvider",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/kaggle.ts",
+      "target": "class:src/providers/kaggle.ts:kaggleProvider",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/button/BottomButton.tsx",
+      "target": "function:src/components/button/BottomButton.tsx:NextButton",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/button/BottomButton.tsx",
+      "target": "function:src/components/button/BottomButton.tsx:PrevButton",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/button/BottomButton.tsx",
+      "target": "function:src/components/button/BottomButton.tsx:Button",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:RectangleSelector",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:LeafletMapSelector",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:geocodeWithNominatim",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:searchNominatimSuggestions",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:fetchPopularPlaces",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:fetchOsrmRoute",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:loadGoogleMaps",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:getBrowserLocation",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:getRecentSearches",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:rememberRecentSearch",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:buildLeafletTileProvider",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:getInitialApiKeys",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "function:src/components/nav/TopNav.tsx:TopNav",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "function:src/components/nav/TopNav.tsx:NavButton",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/modal/Modal.tsx",
+      "target": "function:src/components/modal/Modal.tsx:Modal",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/Processing.tsx",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:LeafletMapSelector",
+      "target": "function:src/components/map/SelectMap.tsx:RectangleSelector",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:LeafletMapSelector",
+      "target": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "target": "function:src/components/map/SelectMap.tsx:geocodeWithNominatim",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "target": "function:src/components/map/SelectMap.tsx:searchNominatimSuggestions",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "target": "function:src/components/map/SelectMap.tsx:fetchPopularPlaces",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "target": "function:src/components/map/SelectMap.tsx:fetchOsrmRoute",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:OSMMapTools",
+      "target": "function:src/components/map/SelectMap.tsx:getBrowserLocation",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "target": "function:src/components/map/SelectMap.tsx:loadGoogleMaps",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "target": "function:src/components/map/SelectMap.tsx:searchNominatimSuggestions",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "target": "function:src/components/map/SelectMap.tsx:getBrowserLocation",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "target": "function:src/components/map/SelectMap.tsx:fetchPopularPlaces",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "target": "function:src/components/map/SelectMap.tsx:LeafletMapSelector",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "target": "function:src/components/map/SelectMap.tsx:GoogleMapSelector",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "target": "function:src/components/map/SelectMap.tsx:buildLeafletTileProvider",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "target": "function:src/components/map/SelectMap.tsx:getInitialApiKeys",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "target": "function:src/components/map/SelectMap.tsx:getRecentSearches",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/map/SelectMap.tsx:MapComponent",
+      "target": "function:src/components/map/SelectMap.tsx:rememberRecentSearch",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/nav/TopNav.tsx:TopNav",
+      "target": "function:src/components/modal/Modal.tsx:Modal",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:src/components/nav/TopNav.tsx:TopNav",
+      "target": "function:src/components/nav/TopNav.tsx:NavButton",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "class:src/providers/colab.ts:colabProvider",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "returns",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "class:src/providers/custom.ts:customProvider",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "returns",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "class:src/providers/kaggle.ts:kaggleProvider",
+      "target": "class:src/components/map/Processing.tsx:Building",
+      "type": "returns",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "file:src/components/map/Processing.tsx",
+      "type": "documents",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/agent-runtime.md",
+      "target": "file:src/components/map/SelectMap.tsx",
+      "type": "documents",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/agent-runtime.md",
+      "target": "file:src/providers/colab.ts",
+      "type": "documents",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/agent-runtime.md",
+      "target": "file:src/providers/custom.ts",
+      "type": "documents",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/agent-runtime.md",
+      "target": "file:src/providers/kaggle.ts",
+      "type": "documents",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.vscode/tasks.json",
+      "target": "document:docs/agent-runtime.md",
+      "type": "related",
+      "weight": 0.4,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/index.ts",
+      "target": "class:src/providers/colab.ts:colabProvider",
+      "type": "exports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/index.ts",
+      "target": "class:src/providers/kaggle.ts:kaggleProvider",
+      "type": "exports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/index.ts",
+      "target": "class:src/providers/custom.ts:customProvider",
+      "type": "exports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderSelector.tsx",
+      "target": "file:src/components/gpu/ProviderCard.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderCard.tsx",
+      "target": "file:src/providers/index.ts",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/AppOnlyGate.tsx",
+      "target": "file:src/components/flex/Column.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/AppOnlyGate.tsx",
+      "target": "file:src/components/text/Title.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/AppOnlyGate.tsx",
+      "target": "file:src/components/text/Description.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/flex/Column.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/text/Title.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/text/Description.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "file:src/components/modal/Modal.tsx",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderCard.tsx",
+      "target": "file:src/providers/index.ts",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/gpu/ProviderSelector.tsx",
+      "target": "file:src/providers/index.ts",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:geocodeWithNominatim",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:searchNominatimSuggestions",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:fetchPopularPlaces",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:fetchOsrmRoute",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:getBrowserLocation",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:getRecentSearches",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:rememberRecentSearch",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:buildLeafletTileProvider",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:getInitialApiKeys",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/map/SelectMap.tsx",
+      "target": "function:src/components/map/SelectMap.tsx:loadGoogleMaps",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/components/nav/TopNav.tsx",
+      "target": "function:src/components/nav/TopNav.tsx:TopNav",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/lightning.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports GPUProvider, ProviderConfig, BoundsPayload",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/lightning.ts",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports DeviceBrainProfile",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/modal.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports GPUProvider, ProviderConfig, BoundsPayload",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/modal.ts",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports DeviceBrainProfile",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/paperspace.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports GPUProvider, ProviderConfig, BoundsPayload",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/paperspace.ts",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports DeviceBrainProfile",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/runpod.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports GPUProvider, ProviderConfig, BoundsPayload",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/runpod.ts",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports DeviceBrainProfile",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/vastai.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports GPUProvider, ProviderConfig, BoundsPayload",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/vastai.ts",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports DeviceBrainProfile",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports GPUProvider",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/lightning.ts",
+      "type": "imports",
+      "label": "imports lightningProvider",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/modal.ts",
+      "type": "imports",
+      "label": "imports modalProvider",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/paperspace.ts",
+      "type": "imports",
+      "label": "imports paperspaceProvider",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/runpod.ts",
+      "type": "imports",
+      "label": "imports runpodProvider",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/vastai.ts",
+      "type": "imports",
+      "label": "imports vastaiProvider",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/colab.ts",
+      "type": "imports",
+      "label": "imports colabProvider (external batch)",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/kaggle.ts",
+      "type": "imports",
+      "label": "imports kaggleProvider (external batch)",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/providers/registry.ts",
+      "target": "file:src/providers/custom.ts",
+      "type": "imports",
+      "label": "imports customProvider (external batch)",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/areaStore.ts",
+      "target": "file:src/three/Space.tsx",
+      "type": "used-by",
+      "label": "Space reads areas and center from useAreaStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/areaStore.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App reads/writes areas and center via useAreaStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/carStore.ts",
+      "target": "file:src/three/Car.tsx",
+      "type": "used-by",
+      "label": "Car reads thirdMode and setThirdMode from useCarStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/exportStore.ts",
+      "target": "file:src/three/Space.tsx",
+      "type": "used-by",
+      "label": "Export component reads action, fleetSpaceId, exportType from useActionStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/exportStore.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App calls setAction and setFleet via useActionStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/runtimeStore.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App reads computeMode, remoteEndpoint, remoteApiKey from useRuntimeStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/runtimeStore.ts",
+      "target": "file:src/providers/types.ts",
+      "type": "imports",
+      "label": "imports ProviderConfig type",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/state/sceneStore.ts",
+      "target": "file:src/three/Space.tsx",
+      "type": "used-by",
+      "label": "Space reads materialPreset, textureEnabled, heightScale, defaultHeight, levelHeight, heightmapEnabled, heightmapStrength from useSceneStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Car.tsx",
+      "target": "file:src/state/carStore.ts",
+      "type": "imports",
+      "label": "imports useCarStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Space.tsx",
+      "target": "file:src/three/Car.tsx",
+      "type": "contains",
+      "label": "Space renders <Car /> component",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Space.tsx",
+      "target": "file:src/state/areaStore.ts",
+      "type": "imports",
+      "label": "imports useAreaStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Space.tsx",
+      "target": "file:src/state/exportStore.ts",
+      "type": "imports",
+      "label": "imports useActionStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Space.tsx",
+      "target": "file:src/state/sceneStore.ts",
+      "type": "imports",
+      "label": "imports useSceneStore, BuildingMaterialPreset",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Space.tsx",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports getDeviceBrainProfile, limitForDevice",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/three/Space.tsx",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App renders <Space /> as the 3D scene",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/three/Space.tsx",
+      "type": "imports",
+      "label": "imports Space component",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/state/areaStore.ts",
+      "type": "imports",
+      "label": "imports useAreaStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/state/exportStore.ts",
+      "type": "imports",
+      "label": "imports useActionStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/state/runtimeStore.ts",
+      "type": "imports",
+      "label": "imports useRuntimeStore",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports getDeviceBrainProfile, limitForDevice",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/utils/requestCache.ts",
+      "type": "imports",
+      "label": "imports cachedJson, fetchJsonWithTimeout",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/utils/remoteCompute.ts",
+      "type": "imports",
+      "label": "imports requestRemoteBuildings",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/utils/cookie.ts",
+      "type": "imports",
+      "label": "imports getCookie",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/ui/App.tsx",
+      "target": "file:src/utils/appDistribution.ts",
+      "type": "imports",
+      "label": "imports shouldBlockPublicWebsite",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/remoteCompute.ts",
+      "target": "file:src/utils/deviceBrain.ts",
+      "type": "imports",
+      "label": "imports DeviceBrainProfile type",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/remoteCompute.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App calls requestRemoteBuildings when computeMode is remote",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/requestCache.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App uses cachedJson and fetchJsonWithTimeout for Overpass queries",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/deviceBrain.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App uses deviceBrain profile for feature limits and timeouts",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/deviceBrain.ts",
+      "target": "file:src/three/Space.tsx",
+      "type": "used-by",
+      "label": "Space uses deviceBrain for terrain segments, pixel ratio, building limits",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/deviceBrain.ts",
+      "target": "file:src/providers/lightning.ts",
+      "type": "used-by",
+      "label": "Provider uses DeviceBrainProfile in buildRequestBody",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/cookie.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App uses getCookie to check fleet login status",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/appDistribution.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "used-by",
+      "label": "App calls shouldBlockPublicWebsite to gate between Map3DApp and AppOnlyGate",
+      "direction": "forward"
+    },
+    {
+      "source": "file:src/utils/locationMemory.ts",
+      "target": "file:src/ui/App.tsx",
+      "type": "unused",
+      "label": "Exported but not imported by App.tsx (may be used by map component)",
+      "direction": "forward"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:entry-app-shell",
+      "name": "Entry & App Shell",
+      "description": "Bootstrap entry point and top-level application component that orchestrates the main workflow (map selection, processing, 3D scene).",
+      "nodeIds": [
+        "file:src/main.tsx",
+        "file:src/ui/App.tsx",
+        "file:src/index.css",
+        "file:src/global.d.ts",
+        "file:src/vite-env.d.ts",
+        "file:index.html"
+      ]
+    },
+    {
+      "id": "layer:ui-components",
+      "name": "UI Components",
+      "description": "Reusable React UI primitives (buttons, modals, text, flex layout) and domain-specific components for map selection, GPU provider selection, and navigation.",
+      "nodeIds": [
+        "file:src/components/button/BottomButton.tsx",
+        "file:src/components/text/Title.tsx",
+        "file:src/components/text/Description.tsx",
+        "file:src/components/flex/Column.tsx",
+        "file:src/components/flex/Row.tsx",
+        "file:src/components/modal/Modal.tsx",
+        "file:src/components/FullscreenModal.tsx",
+        "file:src/components/AppOnlyGate.tsx",
+        "file:src/components/nav/TopNav.tsx",
+        "file:src/components/map/SelectMap.tsx",
+        "file:src/components/map/Processing.tsx",
+        "file:src/components/gpu/ProviderCard.tsx",
+        "file:src/components/gpu/ProviderSelector.tsx"
+      ]
+    },
+    {
+      "id": "layer:three-rendering",
+      "name": "Three.js 3D Rendering",
+      "description": "React-Three-Fiber scene composition and 3D object components for rendering buildings, cars, and the 3D map space.",
+      "nodeIds": [
+        "file:src/three/Space.tsx",
+        "file:src/three/Car.tsx"
+      ]
+    },
+    {
+      "id": "layer:state-management",
+      "name": "State Management",
+      "description": "Zustand stores managing application state: map areas, selected buildings, export actions, runtime configuration, and 3D scene properties.",
+      "nodeIds": [
+        "file:src/state/areaStore.ts",
+        "file:src/state/carStore.ts",
+        "file:src/state/exportStore.ts",
+        "file:src/state/runtimeStore.ts",
+        "file:src/state/sceneStore.ts"
+      ]
+    },
+    {
+      "id": "layer:gpu-providers",
+      "name": "GPU Providers",
+      "description": "Remote GPU/cloud compute provider definitions and registry for offloading 3D building processing to external services (Colab, Kaggle, RunPod, etc.).",
+      "nodeIds": [
+        "file:src/providers/types.ts",
+        "file:src/providers/registry.ts",
+        "file:src/providers/index.ts",
+        "file:src/providers/colab.ts",
+        "file:src/providers/kaggle.ts",
+        "file:src/providers/runpod.ts",
+        "file:src/providers/modal.ts",
+        "file:src/providers/vastai.ts",
+        "file:src/providers/paperspace.ts",
+        "file:src/providers/lightning.ts",
+        "file:src/providers/custom.ts"
+      ]
+    },
+    {
+      "id": "layer:utilities-infrastructure",
+      "name": "Utilities & Infrastructure",
+      "description": "Cross-cutting utilities: API clients, request caching, device detection, cookie handling, remote compute helpers, theming, and external CLI tools.",
+      "nodeIds": [
+        "file:src/api/axios.ts",
+        "file:src/utils/appDistribution.ts",
+        "file:src/utils/cookie.ts",
+        "file:src/utils/deviceBrain.ts",
+        "file:src/utils/locationMemory.ts",
+        "file:src/utils/remoteCompute.ts",
+        "file:src/utils/requestCache.ts",
+        "file:src/theme/color.ts",
+        "file::tools/map3d-cli.mjs",
+        "file::tools/map3d-cli-adapter-server.mjs",
+        "file::tools/map3d-mcp.mjs"
+      ]
+    },
+    {
+      "id": "layer:configuration",
+      "name": "Configuration & Documentation",
+      "description": "Project configuration files (TypeScript, Vite, ESLint, environment), documentation, and IDE integration.",
+      "nodeIds": [
+        "file:.env.example",
+        "file:.gitignore",
+        "file:LICENSE",
+        "file:README.md",
+        "file:agent-manifest.json",
+        "file:eslint.config.js",
+        "file:package.json",
+        "file:package-lock.json",
+        "file:tsconfig.json",
+        "file:tsconfig.app.json",
+        "file:tsconfig.node.json",
+        "file:vite.config.ts",
+        "config:.vscode/tasks.json",
+        "document:docs/agent-runtime.md",
+        "file:.github/screenshot.png",
+        "file:public/vite.svg"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Entry Point & Application Shell",
+      "description": "The app bootstraps from main.tsx which renders the App component. App.tsx is the main orchestrator managing a 3-step wizard flow: (1) map selection, (2) data processing, (3) 3D scene. It also checks whether the app is running in public website mode or app-first mode via shouldBlockPublicWebsite().",
+      "nodeIds": [
+        "file:src/main.tsx",
+        "file:src/ui/App.tsx",
+        "file:src/components/AppOnlyGate.tsx",
+        "file:src/utils/appDistribution.ts"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Map Area Selection",
+      "description": "The MapComponent (SelectMap.tsx) provides a Leaflet or Google Maps interface for choosing a geographic area. Users can search locations via Nominatim geocoding, use current GPS position, find routes via OSRM, and draw a bounding rectangle. The selected bounds are passed back to App.tsx via the onDone callback, which stores them in the areaStore.",
+      "nodeIds": [
+        "file:src/components/map/SelectMap.tsx",
+        "file:src/state/areaStore.ts",
+        "file:src/utils/locationMemory.ts",
+        "file:src/utils/requestCache.ts"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "OSM Feature Fetching & Processing",
+      "description": "Once an area is selected, App.tsx constructs Overpass API queries to fetch buildings, roads, waterways, green spaces, parking areas, and street furniture (trees, lamps, benches, etc.) from OpenStreetMap. Features are classified by type (building, linear, surface, point) and validated. The deviceBrain utility adapts fetch limits based on hardware capability to prevent browser freezes on low-end devices.",
+      "nodeIds": [
+        "file:src/ui/App.tsx",
+        "file:src/components/map/Processing.tsx",
+        "file:src/utils/deviceBrain.ts",
+        "file:src/utils/requestCache.ts"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Remote GPU Processing",
+      "description": "For users with weak local GPUs, the app supports remote GPU processing. The providers system (Colab, Kaggle, RunPod, Modal, Vast.ai, etc.) follows a GPUProvider interface with standardized endpoint/header/request/response contracts. remoteCompute.ts handles posting building data to a remote server, polling for job completion, and normalizing the response. The runtimeStore tracks compute mode (local vs remote), endpoint URL, and API key.",
+      "nodeIds": [
+        "file:src/utils/remoteCompute.ts",
+        "file:src/providers/types.ts",
+        "file:src/providers/registry.ts",
+        "file:src/providers/colab.ts",
+        "file:src/state/runtimeStore.ts",
+        "file:src/components/gpu/ProviderSelector.tsx"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "3D Scene Rendering with React-Three-Fiber",
+      "description": "Space.tsx is the core 3D renderer using React-Three-Fiber (r3f). It reads buildings and scene features from the areaStore and renders them as extruded geometries. Buildings get procedurally-generated facade textures based on OSM tags (building type, material, height). Roads become strip geometries with lane markings. Surface features (parks, water, parking) become flat textured polygons. Street furniture (trees, lamps, traffic lights) are instanced 3D primitives. The scene supports sky, environment lighting, and car-mode first-person navigation.",
+      "nodeIds": [
+        "file:src/three/Space.tsx",
+        "file:src/three/Car.tsx",
+        "file:src/state/carStore.ts"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Material Presets & Scene Configuration",
+      "description": "The sceneStore manages material presets (Real Life Auto, Concrete, Brick, Glass, Sand, Cinematic Mod, Neon Coast, Next-gen Glass), texture toggles, height scaling, and heightmap settings. TopNav.tsx provides the Options panel for runtime configuration. The 'realistic' preset auto-selects materials based on OSM tags: commercial buildings get glass, residential get brick, industrial get concrete, etc. Each preset has distinct color palettes, window grid patterns, and emissive properties for night-glow effects.",
+      "nodeIds": [
+        "file:src/state/sceneStore.ts",
+        "file:src/components/nav/TopNav.tsx",
+        "file:src/theme/color.ts"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "Export Pipeline & GLB Generation",
+      "description": "The exportStore triggers GLB export when the user clicks 'Export GLB'. Space.tsx uses Three.js GLTFExporter to serialize the scene. All meshes tagged with userData.exportToGLB=true are included. The export flow also supports Fleet integration for uploading GLB files to remote 3D viewers. The full data flow: user selects area -> Overpass fetches OSM data -> features rendered as 3D geometry -> textures applied -> GLB exported for use in digital twins, drone surveys, or GPS marker applications.",
+      "nodeIds": [
+        "file:src/state/exportStore.ts",
+        "file:src/three/Space.tsx",
+        "file:src/api/axios.ts"
+      ]
+    }
+  ],
+  "project": {
+    "description": "3D building mapping service with React-Three-Fiber",
+    "frameworks": [
+      "react",
+      "three.js",
+      "react-three-fiber",
+      "leaflet",
+      "zustand",
+      "vite"
+    ],
+    "gitCommitHash": "not-a-git-repo",
+    "languages": [
+      "typescript",
+      "javascript",
+      "html",
+      "css",
+      "json",
+      "markdown"
+    ],
+    "name": "map3d",
+    "analyzedAt": "2026-07-01T01:54:29.1668831+06:00"
+  }
+}

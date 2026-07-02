@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map to GLB - Download</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .wrap { max-width: 520px; width: 100%; text-align: center; }
+    .logo { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h1 {
+      font-size: 2.2rem; font-weight: 700; margin-bottom: 0.4rem;
+      background: linear-gradient(136deg, #60a5fa, #a78bfa, #f472b6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sub { color: #94a3b8; font-size: 1rem; margin-bottom: 2rem; line-height: 1.5; }
+
+    .detected-box {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 14px; padding: 2rem 1.5rem; margin-bottom: 1.2rem;
+      box-shadow: 0 4px 30px rgba(99,102,241,0.35);
+    }
+    .detected-box .os-name { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-bottom: 0.3rem; }
+    .detected-box .file-name { font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem; word-break: break-all; }
+    .dl-link {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.85rem 2.2rem; font-size: 1rem; font-weight: 600;
+      color: #fff; background: #fff; background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3); border-radius: 10px;
+      text-decoration: none; transition: all 0.2s; cursor: pointer;
+    }
+    .dl-link:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+    .dl-link svg { width: 18px; height: 18px; }
+    .version { font-size: 0.8rem; color: #64748b; margin-top: 0.8rem; }
+
+    .divider { border: none; border-top: 1px solid #1e293b; margin: 1.5rem 0; }
+
+    .other-title { font-size: 0.85rem; color: #64748b; margin-bottom: 0.8rem; }
+    .others { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+    .others a {
+      padding: 0.55rem 1rem; font-size: 0.85rem; font-weight: 500;
+      color: #94a3b8; background: #1e293b; border: 1px solid #334155;
+      border-radius: 8px; text-decoration: none; transition: all 0.2s;
+    }
+    .others a:hover { color: #e2e8f0; border-color: #475569; }
+    .others a.highlighted { border-color: #3b82f6; color: #60a5fa; }
+
+    .footer { margin-top: 2rem; }
+    .footer a { color: #60a5fa; text-decoration: none; font-size: 0.85rem; }
+    .footer a:hover { text-decoration: underline; }
+
+    .loading { color: #64748b; font-size: 0.9rem; padding: 2rem; }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.7rem; }
+      .others { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">&#x1F5FA;&#xFE0F;</div>
+  <h1>Map to GLB</h1>
+  <p class="sub">Real-world 3D maps from OpenStreetMap data. Buildings, roads, parks &amp; water &mdash; exported as GLB.</p>
+
+  <div id="content"><p class="loading">Detecting your system...</p></div>
+
+  <hr class="divider">
+  <p class="other-title">Other platforms</p>
+  <div class="others" id="others"></div>
+
+  <div class="footer">
+    <a href="https://github.com/farhanic017/map-to-glb" target="_blank">View on GitHub</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var REPO = "farhanic017/map-to-glb";
+  var TAG_FALLBACK = "v2.0.0";
+
+  var PLATFORMS = [
+    { id: "windows", label: "Windows", icon: "\uD83D\uDDA5\uFE0F", pattern: /x64-setup\.exe$/ },
+    { id: "macos",   label: "macOS",   icon: "\uD83C\uDF4E",      pattern: /aarch64\.dmg$/ },
+    { id: "linux",   label: "Linux (Debian/Ubuntu)", icon: "\uD83D\uDCCB", pattern: /_amd64\.deb$/ },
+    { id: "linux-p", label: "Linux (Portable)", icon: "\uD83D\uDCE6", pattern: /AppImage$/ }
+  ];
+
+  function detect() {
+    var u = navigator.userAgent.toLowerCase();
+    if (u.indexOf("win") !== -1)  return "windows";
+    if (u.indexOf("mac") !== -1)  return "macos";
+    if (u.indexOf("linux") !== -1) return "linux";
+    return "windows";
+  }
+
+  function fmt(bytes) {
+    return (bytes / 1048576).toFixed(1) + " MB";
+  }
+
+  function render(tag, assets, detected) {
+    var content = document.getElementById("content");
+    var othersDiv = document.getElementById("others");
+
+    var matched = {};
+    for (var i = 0; i < assets.length; i++) {
+      for (var j = 0; j < PLATFORMS.length; j++) {
+        if (PLATFORMS[j].pattern.test(assets[i].name)) {
+          matched[PLATFORMS[j].id] = assets[i];
+        }
+      }
+    }
+
+    var current = detected === "linux" && !matched.linux ? "linux-p" : detected;
+    var asset = matched[current];
+
+    if (asset) {
+      content.innerHTML =
+        '<div class="detected-box">' +
+          '<div class="os-name">' + PLATFORMS.find(function(p){return p.id===current}).icon + ' ' + PLATFORMS.find(function(p){return p.id===current}).label + ' detected</div>' +
+          '<div class="file-name">' + asset.name + '</div>' +
+          '<a class="dl-link" href="' + asset.browser_download_url + '">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+            'Download for ' + PLATFORMS.find(function(p){return p.id===current}).label +
+          '</a>' +
+          '<div class="version">Version ' + tag.replace("v","") + ' &middot; ' + fmt(asset.size) + '</div>' +
+        '</div>';
+    } else {
+      content.innerHTML =
+        '<div class="detected-box">' +
+          '<div class="os-name">' + PLATFORMS.find(function(p){return p.id===current}).icon + ' ' + PLATFORMS.find(function(p){return p.id===current}).label + ' detected</div>' +
+          '<div class="file-name">Build in progress or not yet available</div>' +
+          '<a class="dl-link" href="https://github.com/' + REPO + '/releases/tag/' + tag + '">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+            'Go to Releases' +
+          '</a>' +
+        '</div>';
+    }
+
+    PLATFORMS.forEach(function (p) {
+      if (p.id === current) return;
+      var a = document.createElement("a");
+      a.textContent = p.icon + " " + p.label;
+      if (matched[p.id]) {
+        a.href = matched[p.id].browser_download_url;
+      } else {
+        a.href = "https://github.com/" + REPO + "/releases/tag/" + tag;
+      }
+      othersDiv.appendChild(a);
+    });
+  }
+
+  var detected = detect();
+
+  fetch("https://api.github.com/repos/" + REPO + "/releases/latest")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      var tag = data ? data.tag_name : TAG_FALLBACK;
+      var assets = data ? (data.assets || []) : [];
+      render(tag, assets, detected);
+    })
+    .catch(function () {
+      render(TAG_FALLBACK, [], detected);
+    });
+})();
+</script>
+</body>
+</html>
