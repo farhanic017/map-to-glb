@@ -1,121 +1,90 @@
-<p align='center'>
-<h1 align='center'>Map to GLB</h1>
-<p align='center'>Generate a real world 3D map and export as GLB</p>
+<p align="center">
+  <img src="./.github/icon.png" alt="Map to GLB Logo" width="120" />
 </p>
 
-<p align='center'>
-<a href="https://github.com/farhanic017/map-to-glb/issues">Report Bugs</a>
+<h1 align="center">Map to GLB</h1>
+
+<p align="center">
+  <strong>Generate real-world 3D maps and export as GLB files</strong>
 </p>
+
+<p align="center">
+  <a href="https://maptoglb.vercel.app/">Website</a> ·
+  <a href="https://github.com/farhanic017/map-to-glb/releases/latest">Download</a> ·
+  <a href="https://github.com/farhanic017/map-to-glb/issues">Report Bugs</a> ·
+  <a href="https://www.patreon.com/cw/Farhanic">Sponsor</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/farhanic017/map-to-glb?style=flat-square&color=blue" alt="Version" />
+  <img src="https://img.shields.io/github/license/farhanic017/map-to-glb?style=flat-square" alt="License" />
+  <img src="https://img.shields.io/github/downloads/farhanic017/map-to-glb/total?style=flat-square&color=green" alt="Downloads" />
+  <img src="https://img.shields.io/github/stars/farhanic017/map-to-glb?style=flat-square&color=yellow" alt="Stars" />
+</p>
+
+---
 
 ![Map to GLB Screenshot](./.github/screenshot.png)
 
-## Live Demo
-
-https://github.com/user-attachments/assets/live-demo.mp4
-
-## About The Project
-
-Map to GLB is a 3D building mapping service implemented with [React-Three-Fiber](https://github.com/pmndrs/react-three-fiber). It allows exporting as a GLB file, and all features are free to use. Based on this project, various functionalities such as **digital twin**, **drone surveying**, and **GPS markers** can be implemented.
-
-The map selector supports several free basemaps by default: OpenStreetMap, CARTO Light/Dark, Esri Satellite, and OpenTopoMap. It also supports Google Maps, MapTiler, and Mapbox when a valid API key is entered in the map provider panel. These maps are used as selection basemaps; exported 3D building and road geometry still comes from OpenStreetMap/Overpass data.
-
-## App-First Runtime
-
-Map to GLB supports an app-first workflow for local machines, weak GPUs, remote GPU servers, CLIs, MCP clients, terminals, and IDEs. Development still works in the browser, but production website access can be disabled with:
-
-```bash
-VITE_DISABLE_PUBLIC_WEB=true
-```
-
-Localhost stays enabled for development. Public hosts show an app-first notice when the flag is active.
-
-## Map API Keys
-
-Select an API-backed provider from the map menu, paste its key into the box, and press Enter. The key is saved in local browser storage and used immediately.
-
-Google Maps can also be preconfigured by creating `.env.local` from `.env.example`, setting `VITE_GOOGLE_MAPS_API_KEY`, and restarting the dev server. Google Maps requires an enabled Maps JavaScript API key and Google Cloud billing.
-
-## Remote GPU Processing
-
-Users with weak GPUs can switch `Options > Compute Runtime > Processing` to `Remote GPU server`, enter a server endpoint, and let the server process selected map bounds. Remote processing can take longer than local processing because work is queued on the remote machine and returned when ready.
-
-Preconfigure a remote endpoint with:
-
-```bash
-VITE_REMOTE_GPU_ENDPOINT=https://your-server.example
-```
-
-The app, CLI, and MCP bridge all use the same remote contract. See [docs/agent-runtime.md](docs/agent-runtime.md).
-
-## Realistic Materials
-
-The default material preset is `Real Life Auto`. It reads OpenStreetMap tags such as `building`, `building:material`, `roof:material`, and `roof:colour` to choose practical facade and roof styles automatically. Buildings use generated PBR-style procedural maps for facade color, bump, roughness, emissive windows, and roof detail. Roads use asphalt strips with lane markings instead of flat colored lines, and terrain can use textured ground materials when heightmap is enabled.
-
-## CLI, MCP, Terminal, And IDE
-
-Print the processing schema:
-
-```bash
-npm run mapglb:cli -- schema
-```
-
-Run remote processing:
-
-```bash
-npm run mapglb:cli -- process --bounds 23.7,90.3,23.8,90.4 --remote https://your-server.example
-```
-
-Start the MCP server:
-
-```bash
-npm run mapglb:mcp
-```
-
-Start the BigPickle/OpenCode adapter:
-
-```bash
-npm run mapglb:adapter
-```
-
-Then set the app remote endpoint to:
-
-```text
-http://127.0.0.1:8787
-```
-
-VS Code tasks and `agent-manifest.json` are included for IDE and agent host integration.
-
-> [!IMPORTANT]
-> <strong>This project cannot guarantee the accuracy of the data.</strong> Since it uses OpenStreetMap data, some height values may be missing or incorrectly recorded. To address this issue, an option will be added in the future to allow users to manually correct the data.
-
-## Roadmap
-
-- [x] Create 3D Buildings
-- [x] Create Roads
-- [x] Export GLB
-- [x] Building Texture
-- [x] Height Customization
-- [x] Material
-- [x] Heightmap
-- [x] Google Maps Provider
-- [x] Multiple Free/API Map Providers
-- [x] Remote GPU Processing
-- [x] CLI
-- [x] MCP
-- [x] Agent Manifest
-- [x] IDE Tasks
-- [x] Real Life Auto Materials
-- [x] OctoCode Integration
-- [x] Search API Support
-
 ## Demo
 
-https://github.com/user-attachments/assets/1b61c2f8-dcf9-40bb-9804-59f6a74594dc
+https://github.com/user-attachments/assets/live%20demo.mp4
 
-## Contributors
+## About
 
-Farhan Dhrubo [(GitHub)](https://github.com/farhanic017)
+Map to GLB is a 3D building mapping service built with [React Three Fiber](https://github.com/pmndrs/react-three-fiber). Select any area on the map and export real-world buildings, roads, parks, and water features as GLB files for use in games, visualization, 3D printing, and digital twins.
+
+**Features:**
+- Real OSM building footprints and heights
+- Roads, railways, waterways, and street furniture
+- Multiple map providers (OpenStreetMap, CARTO, Esri, Google Maps)
+- GLB export for Unity, Unreal, Blender, and web
+- Optional remote GPU processing for large areas
+
+## Download
+
+| Platform | File | Install |
+|----------|------|---------|
+| **Windows** | `*-x64-setup.exe` | Double-click to install |
+| **macOS** | `*-aarch64.dmg` | Open DMG, drag to Applications |
+| **Linux (Debian/Ubuntu)** | `*_amd64.deb` | `sudo dpkg -i *.deb` |
+| **Linux (Portable)** | `*.AppImage` | `chmod +x *.AppImage && ./*.AppImage` |
+
+Or visit the [Releases](https://github.com/farhanic017/map-to-glb/releases) page.
+
+## Tech Stack
+
+- **Frontend:** React, TypeScript, Vite
+- **3D:** Three.js, React Three Fiber, Drei
+- **Map:** Leaflet, OpenStreetMap/Overpass API
+- **Desktop:** Tauri v2 (Rust)
+- **State:** Zustand
+
+## Getting Started
+
+```bash
+# Clone
+git clone https://github.com/farhanic017/map-to-glb.git
+cd map-to-glb
+
+# Install dependencies
+npm install
+
+# Run in browser
+npm run dev
+
+# Build desktop app
+npm run tauri:build
+```
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+Distributed under the [GNU General Public License v3.0](LICENSE).
+
+## Author
+
+**Farhan Dhrubo** — [GitHub](https://github.com/farhanic017)
+
+## Support
+
+If this project helps you, consider supporting on [Patreon](https://www.patreon.com/cw/Farhanic).
