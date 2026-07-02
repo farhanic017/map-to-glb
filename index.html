@@ -2,12 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- SEO -->
+    <title>Map to GLB - Convert Real-World Maps to 3D GLB Files</title>
+    <meta name="description" content="Generate real-world 3D maps as GLB files using OpenStreetMap data. Export buildings, roads, parks, and water features for games, visualization, and 3D printing. Free and open source." />
+    <meta name="keywords" content="3D map, GLB, OpenStreetMap, buildings, 3D export, map to 3D, OSM, building mapping, 3D printing, game assets, Three.js, map to GLB" />
+    <meta name="author" content="Farhan Dhrubo" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://maptoglb.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://maptoglb.vercel.app/" />
+    <meta property="og:title" content="Map to GLB - Convert Real-World Maps to 3D GLB Files" />
+    <meta property="og:description" content="Generate real-world 3D maps as GLB files using OpenStreetMap data. Export buildings, roads, parks, and water features." />
+    <meta property="og:image" content="https://maptoglb.vercel.app/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Map to GLB" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://maptoglb.vercel.app/" />
+    <meta name="twitter:title" content="Map to GLB - Convert Real-World Maps to 3D GLB Files" />
+    <meta name="twitter:description" content="Generate real-world 3D maps as GLB files using OpenStreetMap data." />
+    <meta name="twitter:image" content="https://maptoglb.vercel.app/logo.png" />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="128x128" href="/favicon.png" />
-    <title>Map to GLB - 3D Building Mapping</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Map to GLB",
+      "url": "https://maptoglb.vercel.app/",
+      "description": "Generate real-world 3D maps as GLB files using OpenStreetMap data. Export buildings, roads, parks, and water features for games, visualization, and 3D printing.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Windows, macOS, Linux",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Farhan Dhrubo", "url": "https://github.com/farhanic017" }
+    }
+    </script>
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" />
   </head>
   <body>
     <div id="root"></div>
