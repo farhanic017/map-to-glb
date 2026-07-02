@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "productName": "Map to GLB",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "identifier": "com.mapglb.app",
   "build": {
     "beforeBuildCommand": "npm run build",

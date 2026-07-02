@@ -1507,7 +1507,7 @@ function RoadSurface({
         />
       </mesh>
       <Line
-        points={points.map((point) => point.clone().setY(0.22))}
+        points={points.map((point) => point.clone().setY(0.53))}
         color={getRoadLineColor(tags)}
         lineWidth={isPavementRoad(tags) ? 0.8 : 2.5}
         dashed={String(tags.highway || "").includes("service") || isPavementRoad(tags)}
@@ -1726,6 +1726,7 @@ function GrassDetail({
           color="#1a5c12"
           transparent
           opacity={0.9}
+          depthWrite={false}
         />
       </lineSegments>
     </group>
@@ -2038,10 +2039,7 @@ function Building({
   textureEnabled: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
   const [hoverPos, setHoverPos] = useState<THREE.Vector3 | null>(null);
-  const [showTranslations, setShowTranslations] = useState(false);
-  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
   const variantSeed = useMemo(
     () => hashStringSeed(`${id}:${tags?.building || ""}:${tags?.name || ""}`),
     [id, tags]
@@ -2100,14 +2098,11 @@ function Building({
         }}
         onPointerOut={(e) => {
           setHovered(false);
+          setHoverPos(null);
           e.stopPropagation();
         }}
         onPointerMove={(e) => {
           setHoverPos(e.point.clone());
-          e.stopPropagation();
-        }}
-        onClick={(e) => {
-          setClicked(!clicked);
           e.stopPropagation();
         }}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -2142,7 +2137,7 @@ function Building({
           emissiveMap={facadeTextures?.emissiveMap}
         />
       </mesh>
-      {(hovered || clicked) && hoverPos && (
+      {(hovered) && hoverPos && (
           <Html position={[hoverPos.x, hoverPos.y + extrudeSettings.depth + 0.5, hoverPos.z]} center>
           <div
             role="dialog"
@@ -2260,42 +2255,6 @@ function Building({
                   textAlign: "right",
                 }}
               >
-                <div
-                  style={{
-                    fontWeight: "500",
-                    marginBottom: "4px",
-                    color: "#5f6368",
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                  onClick={() => setShowTranslations(!showTranslations)}
-                >
-                  Name Translations
-                  <span>{showTranslations ? "▲" : "▼"}</span>
-                </div>
-                {showTranslations && (
-                  <div>
-                    {Object.entries(tags)
-                      .filter(([key]) => key.startsWith("name:"))
-                      .map(([key, value]) => (
-                        <div
-                          key={key}
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            margin: "4px 0",
-                          }}
-                        >
-                          <span style={{ fontWeight: "500", color: "#5f6368" }}>
-                            {key.replace("name:", "").toUpperCase()}:
-                          </span>
-                          <span style={{ textTransform: "capitalize" }}>{String(value)}</span>
-                        </div>
-                      ))}
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -2307,9 +2266,9 @@ function Building({
         userData={{ exportToGLB: true }}
       >
         <lineBasicMaterial
-          color={hovered || clicked ? "#0f5fbf" : "#5f666b"}
+          color={hovered ? "#0f5fbf" : "#5f666b"}
           transparent
-          opacity={hovered || clicked ? 0.58 : 0.32}
+          opacity={hovered ? 0.58 : 0.32}
           depthWrite={false}
         />
       </lineSegments>
@@ -2373,7 +2332,7 @@ function MapContextFeatures({
       ...limitForDevice(surfaceFeatures, Math.max(80, Math.floor(deviceBrain.maxRoads / 2))),
     ];
 
-    limitForDevice(prioritizedFeatures, deviceBrain.maxRoads).forEach((feature: any, index) => {
+    prioritizedFeatures.forEach((feature: any, index) => {
       const tags = feature.tags || {};
 
       if (getLinearFeatureKind(tags)) {
