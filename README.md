@@ -16,6 +16,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/farhanic017/octocode/blob/main/LICENSE"><img alt="License: GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square" /></a>
   <img src="https://img.shields.io/github/v/release/farhanic017/map-to-glb?style=flat-square&color=blue" alt="Version" />
   <img src="https://img.shields.io/badge/license-GPL--3.0-blue?style=flat-square" alt="License" />
   <img src="https://img.shields.io/github/downloads/farhanic017/map-to-glb/total?style=flat-square&color=green" alt="Downloads" />
