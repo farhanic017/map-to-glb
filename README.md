@@ -35,15 +35,14 @@
 
 ## About
 
-Map to GLB is a 3D building mapping service built with [React Three Fiber](https://github.com/pmndrs/react-three-fiber). Select any area on the map and export real-world buildings, roads, parks, and water features as GLB files for use in games, visualization, 3D printing, and digital twins.
+Map to GLB is a 3D building mapping service built with React Three Fiber. It converts real-world geographic data into clean, ready-to-use 3D assets — pull building footprints, heights, roads, and terrain features straight from OpenStreetMap and export them as a single GLB file in seconds.
 
-**Features:**
-- Real OSM building footprints and heights
-- Roads, railways, waterways, and street furniture
-- Multiple map providers (OpenStreetMap, CARTO, Esri, Google Maps)
-- GLB export for Unity, Unreal, Blender, and web
-- Optional remote GPU processing for large areas
-
+## Features
+🏙️ Real OSM data — accurate building footprints and heights sourced from OpenStreetMap
+🛣️ Full urban detail — roads, railways, waterways, and street furniture included
+🗺️ Multiple map providers — OpenStreetMap, CARTO, Esri, and Google Maps
+📦 GLB export — drop straight into Unity, Unreal, Blender, or the web
+⚡ Remote GPU processing — optional cloud rendering for large-area exports
 ## Download
 
 | Platform | File | Install |
@@ -90,4 +89,4 @@ Distributed under the [GNU General Public License v3.0](LICENSE).
 
 ## Support
 
-If this project helps you, consider supporting on [Patreon](https://www.patreon.com/cw/Farhanic).
+If this project helps you, consider supporting on [Patreon](https://www.patreon.com/cw/Farhanic). . ⭐ Starring the repo helps too
