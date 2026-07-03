@@ -39,10 +39,15 @@ Map to GLB is a 3D building mapping service built with React Three Fiber. It con
 
 ## Features
 🏙️ Real OSM data — accurate building footprints and heights sourced from OpenStreetMap
+
 🛣️ Full urban detail — roads, railways, waterways, and street furniture included
+
 🗺️ Multiple map providers — OpenStreetMap, CARTO, Esri, and Google Maps
+
 📦 GLB export — drop straight into Unity, Unreal, Blender, or the web
+
 ⚡ Remote GPU processing — optional cloud rendering for large-area exports
+
 ## Download
 
 | Platform | File | Install |
